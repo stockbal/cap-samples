@@ -1,0 +1,82 @@
+<mvc:View xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:macros="sap.fe.macros"
+    xmlns:plugins="sap.m.plugins"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.f"
+    controllerName="de.demo.cap.remote.productcatalogui.controller.Main">
+    <f:DynamicPage id="main"
+        class="sapUiResponsiveContentPadding">
+        <f:title>
+            <f:DynamicPageTitle id="_IDGenDynamicPageTitle1">
+                <f:heading>
+                    <Title id="_IDGenTitle1"
+                        text="{i18n>pageTitle}"
+                        level="H2" />
+                </f:heading>
+                <f:snappedContent>
+                    <Text id="text1"
+                        text="{conditions>/filtersTextInfo}" />
+                </f:snappedContent>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader id="_IDGenDynamicPageHeader1"
+                pinnable="true">
+                <VBox id="_IDGenVBox1">
+                    <macros:FilterBar metaPath="/Product/@com.sap.vocabularies.UI.v1.SelectionFields"
+                        id="FilterBar"
+                        search=".handlers.onSearch"
+                        filterChanged=".handlers.onFiltersChanged" />
+                </VBox>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <VBox id="tableContainer"
+                height="100%">
+                <Table id="productsTable"
+                    noDataText="No data. Adjust filters"
+                    growing="true"
+                    autoPopinMode="true"
+                    growingThreshold="30"
+                    growingScrollToLoad="true"
+                    sticky="ColumnHeaders,HeaderToolbar"
+                    fixedLayout="Strict"
+                    enableBusyIndicator="true"
+                    showNoData="{dataModel>/showNoData}">
+                    <dependents>
+                        <plugins:ColumnResizer id="colResizer"/>
+                    </dependents>
+                    <headerToolbar>
+                        <OverflowToolbar id="tableToolbar">
+                            <Title id="tableTitle"
+                                text="Products"/>
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column id="productNameCol"
+                            width="20em">
+                            <Text id="productNameColLbl"
+                                text="Product" />
+                        </Column>
+                        <Column id="productTypeCol"
+                            width="8em"
+                            minScreenWidth="Tablet"
+                            demandPopin="true">
+                            <Text id="productTypeColLbl"
+                                text="Type" />
+                        </Column>
+                        <Column id="productDescrCol"
+                            width="30em"
+                            minScreenWidth="Desktop"
+                            demandPopin="true"
+                            hAlign="Begin">
+                            <Text id="productDescrColLbl"
+                                text="Description" />
+                        </Column>
+                    </columns>
+                </Table>
+            </VBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

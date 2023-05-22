@@ -1,0 +1,38 @@
+{
+  "name": "remote-api-fpm",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^6",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@sap-cloud-sdk/http-client": "^3.1.1",
+    "@sap/ux-specification": "^1.108.5",
+    "sqlite3": "^5"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch": "cds watch",
+    "watch-product-catalog-ui": "cds watch --open product-catalog-ui/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "cds": {
+    "requires": {
+      "CE_PRODUCT_0002": {
+        "kind": "odata",
+        "model": "srv/external/CE_PRODUCT_0002",
+        "[development]": {
+          "credentials": {
+            "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata4/sap/api_product/srvd_a2x/sap/product/0002"
+          }
+        }
+      }
+    }
+  },
+  "sapux": [
+    "app/product-catalog-ui"
+  ]
+}
