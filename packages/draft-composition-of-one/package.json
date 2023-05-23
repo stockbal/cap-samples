@@ -1,0 +1,21 @@
+{
+  "name": "draft-composition-of-one",
+  "version": "1.0.0",
+  "description": "A CAP sample",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^6",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@sap/ux-specification": "^1.108.5",
+    "sqlite3": "^5.0.4"
+  },
+  "scripts": {
+    "start": "cds run",
+    "watch-catalog-ui": "cds watch --open catalog-ui/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "sapux": [
+    "app/catalog-ui"
+  ]
+}
