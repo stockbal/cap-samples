@@ -1,0 +1,25 @@
+{
+  "name": "new-cap",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^7",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/cds-typer": "^0",
+    "@cap-js/sqlite": "^1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch": "cds-ts watch"
+  },
+  "imports": {
+    "#cds-models/*": "./srv/lib/types/cds/*/index.js"
+  }
+}

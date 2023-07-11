@@ -12,3 +12,7 @@
 ## File Upload
 
 - [Upload file with unbound action](./action-file-upload/)
+
+## CAP technical features
+
+- [CAP Type generator](./cap-type-generator/)

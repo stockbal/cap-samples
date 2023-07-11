@@ -1,0 +1,4 @@
+{
+  "cds.typeGenerator.enabled": true,
+  "cds.typeGenerator.outputPath": "srv/lib/types/cds"
+}
