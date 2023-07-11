@@ -2,7 +2,7 @@
 import * as __ from './../../_';
 export type Locale = string;
 // the following represents the CDS aspect 'CodeList'
-export function _CodeListAspect<TBase extends new (...args: any[]) => any>(Base: TBase) {
+export function _CodeListAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class CodeList extends Base {
         name ?: string;
         descr ?: string;
@@ -10,7 +10,7 @@ export function _CodeListAspect<TBase extends new (...args: any[]) => any>(Base:
 }
 export class CodeList extends _CodeListAspect(__.Entity) {}
 // the following represents the CDS aspect 'TextsAspect'
-export function _TextsAspectAspect<TBase extends new (...args: any[]) => any>(Base: TBase) {
+export function _TextsAspectAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class TextsAspect extends Base {
     /**
     * Type for a language code
@@ -24,7 +24,7 @@ export class TextsAspect extends _TextsAspectAspect(__.Entity) {}
 * 
 * See https://cap.cloud.sap/docs/cds/common#entity-sapcommonlanguages
 */
-export function _LanguageAspect<TBase extends new (...args: any[]) => any>(Base: TBase) {
+export function _LanguageAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class Language extends Base {
     /**
     * Type for a language code
@@ -40,7 +40,7 @@ export class Languages extends Array<Language> {}
 * 
 * See https://cap.cloud.sap/docs/cds/common#entity-sapcommoncountries
 */
-export function _CountryAspect<TBase extends new (...args: any[]) => any>(Base: TBase) {
+export function _CountryAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class Country extends Base {
         code ?: string;
   };
@@ -53,7 +53,7 @@ export class Countries extends Array<Country> {}
 * 
 * See https://cap.cloud.sap/docs/cds/common#entity-sapcommoncurrencies
 */
-export function _CurrencyAspect<TBase extends new (...args: any[]) => any>(Base: TBase) {
+export function _CurrencyAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class Currency extends Base {
         code ?: string;
         symbol ?: string;
