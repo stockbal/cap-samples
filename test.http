@@ -1,0 +1,14 @@
+
+GET /odata/v4/catalog/Books
+Host: localhost:4004
+
+###
+
+POST /odata/v4/catalog/Books
+Host: localhost:4004
+Content-Type: application/json
+
+{
+    "title": "Harry Potter and the Half-Blood Prince",
+    "publishedOn": "2005-07-16"
+}
