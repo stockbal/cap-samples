@@ -1,3 +1,4 @@
+import cds from "@sap/cds";
 import { Books, Book } from "#cds-models/CatalogService";
 import { BaseService } from "./base-service";
 
