@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/mvc/ControllerExtension"],function(e){"use strict";return e.extend("bookshop.ext.controller.ListReportExt",{override:{onInit:function(){},onAfterRendering(){}}})});
+//# sourceMappingURL=ListReportExt.controller.js.map

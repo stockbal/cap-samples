@@ -1,0 +1,19 @@
+{
+    "welcomeFile": "/index.html",
+    "authenticationMethod": "route",
+    "routes": [
+      {
+        "source": "^/odata/(.*)$",
+        "target": "/odata/$1",
+        "destination": "bookshop-srv-api",
+        "authenticationType": "xsuaa",
+        "csrfProtection": false
+      },
+      {
+        "source": "^/(.*)",
+        "localDir": "./webapp",
+        "cacheControl": "no-cache, no-store, must-revalidate"
+      }
+    ]
+  }
+  

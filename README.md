@@ -1,26 +1,11 @@
-# CAP Samples
+# Showcases the usage of middleware `ui5-approuter-middleware`
 
-## Remote Services
+> **Note**: Follow this [link](https://github.com/stockbal/cap-samples/tree/main) to show all available scenarios
 
-- [Remote API in Fiori Elements](https://github.com/stockbal/cap-samples/tree/remote-fe-usage)
-- [Remote API in Free Style with FPM](https://github.com/stockbal/cap-samples/tree/remote-fpm)
+Very simple CAP application with a single SAP Fiori Elements application.
 
-## Draft-enabled services
+## Deployment
 
-- [Composition of 1:1 in draft enabled Fiori Elements app](https://github.com/stockbal/cap-samples/tree/draft-composition-of-one)
-
-## Temporal Data
-
-- [Simple model with temporal Data](https://github.com/stockbal/cap-samples/tree/temporal-aspect)
-
-## File Upload
-
-- [Upload file with unbound action](https://github.com/stockbal/cap-samples/tree/action-file-upload)
-
-## CAP technical features
-
-- [CAP Type generator](https://github.com/stockbal/cap-samples/tree/cap-type-generator)
-
-## Authorization/Authentication scenarios
-
-- [Technical access to protected service with `client_credentials` token](https://github.com/stockbal/cap-samples/tree/cap-ext-tech-access)
+- Build the project with `npm run build`
+- Login to target Cloud Foundry space with `cf l`
+- Deploy the app with `npm run deploy`
