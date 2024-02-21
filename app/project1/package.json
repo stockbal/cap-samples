@@ -1,0 +1,19 @@
+{
+  "name": "project1",
+  "version": "0.0.1",
+  "description": "A Fiori application.",
+  "keywords": [
+    "ui5",
+    "openui5",
+    "sapui5"
+  ],
+  "main": "webapp/index.html",
+  "scripts": {
+    "start:local": "ui5 serve",
+    "cf:de": "cf de java-cap-sample-srv",
+    "deploy-config": "npx -p @sap/ux-ui5-tooling fiori add deploy-config cf"
+  },
+  "devDependencies": {
+    "ui5-middleware-approuter": "^3.4.3"
+  }
+}
