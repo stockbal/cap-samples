@@ -1,0 +1,145 @@
+#############################################################################
+# CLIENT CREDENTIALS TOKEN FROM EXTERNAL XSUAA
+#############################################################################
+# Retrieves token via external XSUAA app with granted Admin authority
+# @name extToken
+POST {{$dotenv uaaUrl}}/oauth/token
+Authorization: Basic {{$dotenv extUaaClientId}}:{{$dotenv extUaaClientSecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+
+###
+
+# Analyze Generated token
+POST {{$dotenv uaaUrl}}/introspect
+Authorization: Bearer {{extToken.response.body.access_token}}
+Content-Type: application/x-www-form-urlencoded
+
+token={{extToken.response.body.access_token}}
+
+###
+
+# Retrieve service metadata
+GET {{$dotenv appUrl}}/odata/v4/catalog/$metadata
+Authorization: Bearer {{extToken.response.body.access_token}}
+
+###
+
+# Create new Book
+POST {{$dotenv appUrl}}/odata/v4/catalog/Books
+Authorization: Bearer {{extToken.response.body.access_token}}
+Content-Type: application/json
+
+{
+    "ID": 3,
+    "title": "Harry Potter and the philosophers' stone",
+    "stock": 1000
+}
+
+###
+
+# Read all books
+GET {{$dotenv appUrl}}/odata/v4/catalog/Books
+Authorization: Bearer {{extToken.response.body.access_token}}
+
+###
+
+# Delete new book
+DELETE {{$dotenv appUrl}}/odata/v4/catalog/Books(3)
+Authorization: Bearer {{extToken.response.body.access_token}}
+
+#############################################################################
+# CLIENT CREDENTIALS TOKEN FROM BOUND XSUAA
+#############################################################################
+
+# Retrieve token with standard XSUAA credentials
+# @name token
+POST {{$dotenv uaaUrl}}/oauth/token
+Authorization: Basic {{$dotenv uaaClientId}}:{{$dotenv uaaClientSecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+
+###
+
+# Analyze Generated token
+POST {{$dotenv uaaUrl}}/introspect
+Authorization: Bearer {{token.response.body.access_token}}
+Content-Type: application/x-www-form-urlencoded
+
+token={{token.response.body.access_token}}
+
+###
+
+# Try to read service metadata - should be fine, because of 'authenticated-user' right
+GET {{$dotenv appUrl}}/odata/v4/catalog/$metadata
+Authorization: Bearer {{token.response.body.access_token}}
+
+###
+
+# Try to read Books - should fail with 403, because of missing 'Viewer' right
+GET {{$dotenv appUrl}}/odata/v4/catalog/Books
+Authorization: Bearer {{token.response.body.access_token}}
+
+###
+
+# Create new Book - should fail with 403, because of missing 'Admin' right
+POST {{$dotenv appUrl}}/odata/v4/catalog/Books
+Authorization: Bearer {{token.response.body.access_token}}
+Content-Type: application/json
+
+{
+    "ID": 10,
+    "title": "The Deep",
+    "stock": -1
+}
+
+#############################################################################
+# USER (PASSWORD) TOKEN FROM BOUND XSUAA
+#############################################################################
+
+# Retrieve user token with Admin/Viewer rights
+# @name userToken
+POST {{$dotenv uaaUrl}}/oauth/token
+Authorization: Basic {{$dotenv uaaClientId}}:{{$dotenv uaaClientSecret}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password
+&username={{$dotenv user}}
+&password={{$dotenv pw}}
+
+###
+
+# Create new Book
+POST {{$dotenv appUrl}}/odata/v4/catalog/Books
+Authorization: Bearer {{userToken.response.body.access_token}}
+Content-Type: application/json
+
+{
+    "ID": 4,
+    "title": "Harry Potter and the chamber of secrets",
+    "stock": 50
+}
+
+###
+
+# Read all books
+GET {{$dotenv appUrl}}/odata/v4/catalog/Books
+Authorization: Bearer {{userToken.response.body.access_token}}
+
+###
+
+# Delete new book
+DELETE {{$dotenv appUrl}}/odata/v4/catalog/Books(4)
+Authorization: Bearer {{userToken.response.body.access_token}}
+
+###
+
+# Analyze Generated token
+# HINT: execute token fetch for @token first
+POST {{$dotenv uaaUrl}}/introspect
+Authorization: Bearer {{token.response.body.access_token}}
+Content-Type: application/x-www-form-urlencoded
+
+token={{userToken.response.body.access_token}}

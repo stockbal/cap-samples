@@ -1,0 +1,36 @@
+{
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Viewer",
+      "description": "Viewer",
+      "grant-as-authority-to-apps": ["$XSAPPNAME(application,bookshop-tech)"]
+    },
+    {
+      "name": "$XSAPPNAME.Admin",
+      "description": "Admin",
+      "grant-as-authority-to-apps": ["$XSAPPNAME(application,bookshop-tech)"]
+    }
+  ],
+  "attributes": [],
+  "role-templates": [
+    {
+      "name": "Viewer",
+      "description": "Bookshop Viewer",
+      "scope-references": ["$XSAPPNAME.Viewer"],
+      "attribute-references": []
+    },
+    {
+      "name": "Admin",
+      "description": "Bookshop Admin",
+      "scope-references": ["$XSAPPNAME.Admin"],
+      "attribute-references": []
+    }
+  ],
+  "role-collections": [
+    {
+      "name": "Admin",
+      "description": "Bookshop Admin",
+      "role-template-references": ["$XSAPPNAME.Viewer", "$XSAPPNAME.Admin"]
+    }
+  ]
+}
