@@ -1,0 +1,19 @@
+{
+  "name": "action-file-upload",
+  "version": "1.0.0",
+  "description": "CAP File upload with unbound action",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@sap/cds": "^6",
+    "decompress": "^4.2.1",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "sqlite3": "^5.0.4"
+  },
+  "scripts": {
+    "start": "cds run"
+  }
+}
