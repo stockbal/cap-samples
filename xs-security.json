@@ -32,5 +32,8 @@
       "description": "Bookshop Admin",
       "role-template-references": ["$XSAPPNAME.Viewer", "$XSAPPNAME.Admin"]
     }
-  ]
+  ],
+  "oauth2-configuration": {
+    "credential-types": ["binding-secret", "x509"]
+  }
 }

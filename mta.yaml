@@ -56,6 +56,8 @@ resources:
         authorities:
           - $XSAPPNAME(application,bookshop).Admin
           - $XSAPPNAME(application,bookshop).Viewer
+        oauth2-configuration:
+          credential-types: ["binding-secret", "x509"]
       service-keys:
         - name: ext_communication
 
