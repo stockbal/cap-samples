@@ -20,8 +20,3 @@ entity Products as
         null as Description : String,
         to_Description
   }
-// projection on API_PRODUCT.A_Product {
-//   key Product,
-//       to_Description.ProductDescription as Description,
-//       to_Description
-// }
