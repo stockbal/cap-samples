@@ -1,0 +1,12 @@
+{
+  "extends": "@tsconfig/node20/tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "#cds-models/*": ["./@cds-models/*"]
+    },
+    "rootDir": "./",
+    "outDir": "./gen/srv"
+  },
+  "exclude": ["./@cds-models/**/*.*"],
+  "include": ["./srv/**/*.ts"]
+}

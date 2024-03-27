@@ -1,0 +1,35 @@
+GET /odata/v4/condition-types/$metadata
+Host: localhost:4004
+
+###
+
+GET /odata/v4/condition-types/Products
+    ?$filter=contains(Description,'fat') and contains(Product,'F')&$count=true
+Host: localhost:4004
+
+###
+
+GET /odata/v4/condition-types/Products
+    ?$filter=contains(Product,'2')&$count=true
+Host: localhost:4004
+
+###
+
+GET /odata/v4/condition-types/Products
+    ?$filter=startswith(Product,'F2') and contains(Description,'yo')
+    &$top=2
+    &$skip=2
+    &$count=true
+Host: localhost:4004
+
+###
+
+GET /odata/v4/condition-types/Products?$count=true
+Host: localhost:4004
+
+###
+
+GET /odata/v4/condition-types/ProductDescriptions
+Host: localhost:4004
+
+###

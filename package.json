@@ -1,0 +1,63 @@
+{
+  "name": "remote-srv-vh-complex",
+  "version": "1.0.0",
+  "description": "CAP project to show usage of remote service entity as value help",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap-cloud-sdk/connectivity": "^3.13.0",
+    "@sap-cloud-sdk/http-client": "^3.13.0",
+    "@sap-cloud-sdk/resilience": "^3.13.0",
+    "@sap/cds": "^7",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/cds-typer": ">=0.1",
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7",
+    "@sap/ux-specification": "^1.120.6",
+    "@tsconfig/node20": "^20.1.4",
+    "cds-plugin-ui5": "^0.6.13",
+    "rimraf": "^5.0.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.3"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch": "cds-ts watch --profile development",
+    "watch:onprem": "cds-ts watch --profile development,onprem",
+    "gen:types": "npx @cap-js/cds-typer \"*\" --outputDirectory @cds-models",
+    "transpile": "tsc && cp -r @cds-models gen/srv",
+    "cds:build": "npx cds build --production",
+    "build": "rimraf gen && npm run cds:build && npm run transpile",
+    "watch-condtypes": "cds-ts watch --open condtypes/index.html?sap-ui-xx-viewCache=false --livereload false"
+  },
+  "cds": {
+    "requires": {
+      "API_PRODUCT": {
+        "kind": "odata-v2",
+        "model": "srv/external/API_PRODUCT",
+        "csrf": true,
+        "csrfInBatch": true
+      },
+      "connectivity": true
+    },
+    "log": {
+      "[development]": {
+        "levels": {
+          "cds": "info"
+        }
+      }
+    }
+  },
+  "imports": {
+    "#cds-models/*": "./@cds-models/*/index.js"
+  },
+  "workspaces": [
+    "app/*"
+  ],
+  "sapux": [
+    "app/condtypes"
+  ]
+}
