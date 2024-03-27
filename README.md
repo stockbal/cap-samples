@@ -13,9 +13,11 @@ The target result should be a value help connected to this `product_Product` fie
 
 ## Testing
 
+Install all dependencies via `npm i`.
+
 ### Using the script `watch:onprem`
 
-This npm script is assuming that you the following profile defined in either `.cdsrc-private.json` or a `.env` file.
+This npm script is assuming that you have defined the following profile in either `.cdsrc-private.json` or a `.env` file.
 
 Template for `.cdsrc-private.json`:
 
@@ -37,3 +39,5 @@ Template for `.cdsrc-private.json`:
   }
 }
 ```
+
+When the file is created, you should be able to test the application with `npm run watch:onprem` against your S/4HANA system
