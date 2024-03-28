@@ -4,12 +4,19 @@
 
 ## Description
 
-The scenario is kept simple to best showcase the usage of the remote service. Therefore there is one simple persistent entity called `ConditionTypes` which will have an association to an entity `A_Product` to store the foreign key in the database table.  
-The remote entity `A_Product` has a `one to many` association to a text entity, called `A_ProductDescription`.
+The scenario is the same as described in [remote-srv-complex](https://github.com/stockbal/cap-samples/tree/remote-srv-vh-complex). 
+This branch is an alternative to the programmatic approach: Instead of manipulating the column for the description field and filtering data via code, this approach uses the built-in mechanism:
+```JavaScript
+    this.on("READ", ProductDescriptions, (req) => {
+      (req.query as any).where(`Language = '${req.locale.toUpperCase()}'`);
+      return extSrv.run(req.query);
+    });
+```
+As you can see, the TypeScript interface doesn't provide access to the .where()-method, which doesn't replace the original where-clause, but extends the existing with "and". But, the method is available and also mentioned by the [learning journey](https://learning.sap.com/learning-journeys/build-side-by-side-extensions-on-sap-btp/exercise-adding-an-external-service_d73e2e9b-3002-41dc-bb0b-b390048eaf4c) in the step to reduce the number of business partners without names.
 
-The target result should be a value help connected to this `product_Product` field, with the two columns Product and Description where the Description column will be retrieved via an OData `$expand` and returns only the translated text (or nothing) which can be extracted in the on-read-handler via `req.locale`.
+In consequence you should be able see the same results, if you run both examples in comparison.
 
-**TODO**: add further description of showcase...
+Additionally, in this example, I've also added in the list report page the product description. There you may observe a strange behaviour, that under certain circumstances the description is empty. This is because of the dummy entry, which could be not available in the on-prem system and that leads to an error in CAP due to a failed request. If you delete that dummy entry, it should work.
 
 ## Testing
 

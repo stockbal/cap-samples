@@ -29,7 +29,6 @@ Object.defineProperty(ConditionTypes, 'name', { value: 'ConditionTypesService.Co
 export function _ProductAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class Product extends Base {
         Product?: string;
-        Description?: string | null;
         to_Description?: __.Association.to.many<ProductDescriptions>;
       static actions: {
       }

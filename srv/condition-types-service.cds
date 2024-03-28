@@ -7,9 +7,9 @@ service ConditionTypesService {
   entity ConditionTypes      as projection on db.ConditionTypes;
 
   @readonly
-  @Capabilities.SearchRestrictions: {Searchable: false}
   entity Products            as projection on db.Products;
 
   @readonly
+  @Capabilities.SearchRestrictions: {Searchable: false}
   entity ProductDescriptions as projection on ext.A_ProductDescription;
 }

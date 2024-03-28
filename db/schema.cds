@@ -14,9 +14,15 @@ entity ConditionTypes : cuid, managed {
   product : Association to Products @title: 'Product';
 }
 
-entity Products as
+entity Products            as
   select from API_PRODUCT.A_Product {
     key Product,
-        null as Description : String,
         to_Description
+  }
+
+entity ProductDescriptions as
+  select from API_PRODUCT.A_ProductDescription {
+    key Product,
+    key Language,
+        ProductDescription
   }
