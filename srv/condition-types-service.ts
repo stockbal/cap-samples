@@ -8,13 +8,6 @@ import {
 } from "#cds-models/ConditionTypesService";
 import { A_Product_ as ExtProducts } from "#cds-models/API_PRODUCT";
 
-type ODataFunction = "equals" | "startswith" | "endswith" | "contains";
-
-type Filter = {
-  type: ODataFunction;
-  value: any;
-};
-
 export default class ConditionTypesService extends ApplicationService {
   override async init() {
     const extSrv = await cds.connect.to("API_PRODUCT");
