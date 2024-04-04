@@ -1,16 +1,7 @@
 {
+  "extends": "@tsconfig/node20/tsconfig.json",
   "compilerOptions": {
-    "target": "es2021",
-    "module": "NodeNext",
     "outDir": "gen/srv",
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "noImplicitAny": true,
-    "skipLibCheck": true,
-    "rootDir": "./",
-    "moduleResolution": "nodenext",
     "paths": {
       "#cds-models/*": ["./@cds-models/*"]
     }
