@@ -1,14 +1,55 @@
+@host = localhost:4004
 
+# @name foundBooks
 GET /odata/v4/catalog/Books
-Host: localhost:4004
+Host: {{host}}
 
 ###
 
+# Create first book
+# @name createdBook
 POST /odata/v4/catalog/Books
-Host: localhost:4004
+Host: {{host}}
 Content-Type: application/json
 
 {
     "title": "Harry Potter and the Half-Blood Prince",
     "publishedOn": "2005-07-16"
 }
+
+###
+
+# Create second book
+# @name createdBook
+POST /odata/v4/catalog/Books
+Host: {{host}}
+Content-Type: application/json
+
+{
+    "title": "Witcher 3",
+    "publishedOn": "2015-07-16"
+}
+
+###
+
+# Draft prepare
+POST /odata/v4/catalog/Books(ID={{createdBook.response.body.ID}},IsActiveEntity=false)/CatalogService.draftPrepare 
+Host: {{host}}
+Content-Type: application/json
+
+{}
+
+###
+
+# Draft activate
+POST /odata/v4/catalog/Books(ID={{createdBook.response.body.ID}},IsActiveEntity=false)/CatalogService.draftActivate 
+Host: {{host}}
+Content-Type: application/json
+
+{}
+
+###
+
+# Delete a book
+DELETE /odata/v4/catalog/Books(ID={{foundBooks.response.body.value[0].ID}},IsActiveEntity=true)
+Host: {{host}}
