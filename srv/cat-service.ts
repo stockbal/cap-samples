@@ -10,6 +10,10 @@ export class CatalogService extends BaseService {
       bookLogger.info(`After READ '${req.target.name}'`, books);
     });
 
+    this.before("DELETE", Books, (req) => {
+      bookLogger.info("BEFORE DELETE " + req.target);
+    });
+
     this.after("READ", this.drafts(Books), (books: Books, req) => {
       bookLogger.info(`After READ '${req.target.name}'`, books);
     });
