@@ -7,7 +7,7 @@ UI: {
     TypeName      : 'Book',
     TypeNamePlural: 'Books'
   },
-  SelectionFields    : [{$value: title}],
+  SelectionFields    : [title],
   LineItem           : [
     {Value: title},
     {Value: stock},
