@@ -4,7 +4,7 @@ import * as _ from './..';
 import * as _API_PRODUCT from './../API_PRODUCT';
 export function _ConditionTypeAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class ConditionType extends Base {
-        product?: __.Association.to<Product> | null;
+        product?: __.Association.to<ExtProduct> | null;
         product_Product?: string | null;
       static actions: {
       }
@@ -15,8 +15,8 @@ Object.defineProperty(ConditionType, 'name', { value: 'db.ConditionTypes' })
 export class ConditionTypes extends Array<ConditionType> {static drafts: typeof ConditionType}
 Object.defineProperty(ConditionTypes, 'name', { value: 'db.ConditionTypes' })
 
-export function _ProductAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
-  return class Product extends Base {
+export function _ExtProductAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
+  return class ExtProduct extends Base {
         Product?: string;
         Description?: string | null;
         to_Description?: __.Association.to.many<_API_PRODUCT.A_ProductDescription_>;
@@ -24,7 +24,7 @@ export function _ProductAspect<TBase extends new (...args: any[]) => object>(Bas
       }
   };
 }
-export class Product extends _ProductAspect(__.Entity) {}
-Object.defineProperty(Product, 'name', { value: 'db.Products' })
-export class Products extends Array<Product> {}
-Object.defineProperty(Products, 'name', { value: 'db.Products' })
+export class ExtProduct extends _ExtProductAspect(__.Entity) {}
+Object.defineProperty(ExtProduct, 'name', { value: 'db.Products' })
+export class ExtProducts extends Array<ExtProduct> {}
+Object.defineProperty(ExtProducts, 'name', { value: 'db.Products' })

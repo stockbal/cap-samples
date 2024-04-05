@@ -20,3 +20,9 @@ entity Products as
         null as Description : String,
         to_Description
   }
+
+
+annotate API_PRODUCT.A_Product with @(
+  plural  : 'ExtProducts',
+  singular: 'ExtProduct'
+);

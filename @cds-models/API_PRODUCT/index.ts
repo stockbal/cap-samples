@@ -1,8 +1,8 @@
 // This is an automatically generated file. Please do not change its contents manually!
 import * as __ from './../_';
 export default { name: 'API_PRODUCT' }
-export function _A_ProductAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
-  return class A_Product extends Base {
+export function _ExtProductAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
+  return class ExtProduct extends Base {
         Product?: string | null;
         ProductType?: string | null;
         CrossPlantStatus?: string | null;
@@ -93,10 +93,10 @@ export function _A_ProductAspect<TBase extends new (...args: any[]) => object>(B
       }
   };
 }
-export class A_Product extends _A_ProductAspect(__.Entity) {}
-Object.defineProperty(A_Product, 'name', { value: 'API_PRODUCT.A_Product' })
-export class A_Product_ extends Array<A_Product> {}
-Object.defineProperty(A_Product_, 'name', { value: 'API_PRODUCT.A_Product' })
+export class ExtProduct extends _ExtProductAspect(__.Entity) {}
+Object.defineProperty(ExtProduct, 'name', { value: 'API_PRODUCT.A_Product' })
+export class ExtProducts extends Array<ExtProduct> {}
+Object.defineProperty(ExtProducts, 'name', { value: 'API_PRODUCT.A_Product' })
 
 export function _A_ProductBasicTextAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
   return class A_ProductBasicText extends Base {

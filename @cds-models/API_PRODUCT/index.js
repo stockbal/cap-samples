@@ -2,8 +2,9 @@
 const cds = require('@sap/cds')
 const csn = cds.entities('API_PRODUCT')
 module.exports = { name: 'API_PRODUCT' }
+module.exports.ExtProduct = csn.A_Product
+module.exports.ExtProducts = csn.A_Product
 module.exports.A_Product = csn.A_Product
-module.exports.A_Product_ = csn.A_Product
 module.exports.A_ProductBasicText = csn.A_ProductBasicText
 module.exports.A_ProductBasicText_ = csn.A_ProductBasicText
 module.exports.A_ProductDescription = csn.A_ProductDescription

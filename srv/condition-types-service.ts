@@ -5,7 +5,7 @@ import {
   ProductDescriptions,
   ConditionType,
 } from "#cds-models/ConditionTypesService";
-import { A_Product_ as ExtProducts } from "#cds-models/API_PRODUCT";
+import { ExtProducts } from "#cds-models/API_PRODUCT";
 
 type ODataFunction = "equals" | "startswith" | "endswith" | "contains";
 

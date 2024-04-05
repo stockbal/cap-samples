@@ -15,7 +15,7 @@ export function _ConditionTypeAspect<TBase extends new (...args: any[]) => objec
     * Canonical user ID
     */
         modifiedBy?: _.User | null;
-        product?: __.Association.to<Product> | null;
+        product?: __.Association.to<ExtProduct> | null;
         product_Product?: string | null;
       static actions: {
       }
