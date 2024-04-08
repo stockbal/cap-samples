@@ -1,10 +1,18 @@
 @host = localhost:4004
 
+####################################
+# READING
+####################################
+
 # @name foundBooks
 GET /odata/v4/catalog/Books
 Host: {{host}}
 
 ###
+
+####################################
+# EDITING
+####################################
 
 # Create first book
 # @name createdBook
@@ -15,6 +23,17 @@ Content-Type: application/json
 {
     "title": "Harry Potter and the Half-Blood Prince",
     "publishedOn": "2005-07-16"
+}
+
+###
+
+# Set stock to invalid value
+PATCH /odata/v4/catalog/Books(ID={{createdBook.response.body.ID}},IsActiveEntity=false)
+Host: {{host}}
+Content-Type: application/json
+
+{
+    "stock": 2000
 }
 
 ###
@@ -31,6 +50,16 @@ Content-Type: application/json
 }
 
 ###
+
+# Delete a book
+DELETE /odata/v4/catalog/Books(ID={{foundBooks.response.body.value[0].ID}},IsActiveEntity=true)
+Host: {{host}}
+
+###
+
+############################################
+# ACTIVATION
+############################################
 
 # Draft prepare
 POST /odata/v4/catalog/Books(ID={{createdBook.response.body.ID}},IsActiveEntity=false)/CatalogService.draftPrepare 
@@ -49,7 +78,3 @@ Content-Type: application/json
 {}
 
 ###
-
-# Delete a book
-DELETE /odata/v4/catalog/Books(ID={{foundBooks.response.body.value[0].ID}},IsActiveEntity=true)
-Host: {{host}}

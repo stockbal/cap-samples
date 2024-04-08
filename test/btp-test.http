@@ -1,0 +1,101 @@
+# @name token
+POST {{$dotenv uaaUrl}}/oauth/token
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic {{$dotenv clientId}}:{{$dotenv clientSecret}}
+
+grant_type=password
+&username={{$dotenv username}}
+&password={{$dotenv pw}}
+
+###
+
+############################################
+# READING
+############################################
+
+# @name foundBooks
+GET {{$dotenv appUrl}}/odata/v4/catalog/Books
+Authorization: Bearer {{token.response.body.access_token}}
+
+###
+
+############################################
+# EDITING
+############################################
+
+# Create first book
+# @name createdBook
+POST {{$dotenv appUrl}}/odata/v4/catalog/Books
+Authorization: Bearer {{token.response.body.access_token}}
+Content-Type: application/json
+
+{
+    "title": "Harry Potter and the Half-Blood Prince",
+    "publishedOn": "2005-07-16"
+}
+
+###
+
+# Set stock to invalid value
+PATCH {{$dotenv appUrl}}/odata/v4/catalog/Books(ID={{createdBook.response.body.ID}},IsActiveEntity=false)
+Authorization: Bearer {{token.response.body.access_token}}
+Content-Type: application/json
+
+{
+    "stock": 2000
+}
+
+###
+
+# Set stock to valid value
+PATCH {{$dotenv appUrl}}/odata/v4/catalog/Books(ID={{createdBook.response.body.ID}},IsActiveEntity=false)
+Authorization: Bearer {{token.response.body.access_token}}
+Content-Type: application/json
+
+{
+    "stock": 500
+}
+
+###
+
+# Create second book
+# @name createdBook
+POST {{$dotenv appUrl}}/odata/v4/catalog/Books
+Authorization: Bearer {{token.response.body.access_token}}
+Content-Type: application/json
+
+{
+    "title": "Witcher 3",
+    "publishedOn": "2015-07-16"
+}
+
+###
+
+# Delete a book
+DELETE {{$dotenv appUrl}}/odata/v4/catalog/Books(ID={{foundBooks.response.body.value[0].ID}},IsActiveEntity=true)
+Authorization: Bearer {{token.response.body.access_token}}
+
+###
+
+############################################
+# ACTIVATION
+############################################
+
+# Draft prepare
+POST {{$dotenv appUrl}}/odata/v4/catalog/Books(ID={{createdBook.response.body.ID}},IsActiveEntity=false)/CatalogService.draftPrepare 
+Authorization: Bearer {{token.response.body.access_token}}
+Content-Type: application/json
+
+{}
+
+###
+
+
+# Draft activate
+POST {{$dotenv appUrl}}/odata/v4/catalog/Books(ID={{createdBook.response.body.ID}},IsActiveEntity=false)/CatalogService.draftActivate 
+Authorization: Bearer {{token.response.body.access_token}}
+Content-Type: application/json
+
+{}
+
+###
