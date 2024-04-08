@@ -7,6 +7,8 @@
   "private": false,
   "dependencies": {
     "@sap/cds": "^7",
+    "@sap/cds-hana": "^2",
+    "@sap/xssec": "^3",
     "express": "^4"
   },
   "devDependencies": {
@@ -15,18 +17,30 @@
     "@sap/cds-dk": "^7",
     "@tsconfig/node20": "^20.1.4",
     "npm-run-all": "^4.1.5",
+    "rimraf": "^5.0.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.3"
   },
   "scripts": {
     "start": "cds-serve",
-    "build": "run-s build:cds build:ts",
+    "build": "rimraf mta_archives && npx -p mbt mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+    "build:cf": "run-s build:cds build:ts",
     "build:cds": "cds build --production",
     "build:ts": "tsc && cp -r @cds-models gen/srv",
     "gen:types": "npx @cap-js/cds-typer \"*\" --outputDirectory @cds-models",
-    "watch": "cds-ts watch"
+    "watch": "cds-ts watch",
+    "cf:de": "cf de cap-type-generator-srv"
   },
   "imports": {
     "#cds-models/*": "./@cds-models/*/index.js"
+  },
+  "cds": {
+    "requires": {
+      "[production]": {
+        "auth": "xsuaa",
+        "db": "hana"
+      }
+    }
   }
 }

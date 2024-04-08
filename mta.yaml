@@ -1,0 +1,54 @@
+_schema-version: "3.1"
+ID: cap-type-generator
+version: 1.0.0
+description: "Testing CAP with @cap-js&#x2F;cds-typer"
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm ci
+        - npm run build:cf
+modules:
+  - name: cap-type-generator-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      buildpack: nodejs_buildpack
+      memory: 256M
+      disk: 512M
+    build-parameters:
+      builder: npm
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: cap-type-generator-db
+      - name: cap-type-generator-auth
+
+  - name: cap-type-generator-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: cap-type-generator-db
+
+resources:
+  - name: cap-type-generator-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+
+  - name: cap-type-generator-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: cap-type-generator-${org}-${space}
+        tenant-mode: dedicated
