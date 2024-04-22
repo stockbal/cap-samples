@@ -30,3 +30,7 @@ Each scenario is realized in a dedicated branch of this repository.
 ## Authorization/Authentication scenarios
 
 - [Technical access to protected service with `client_credentials` token](https://github.com/stockbal/cap-samples/tree/ext-technical-access)
+
+## HANA Cloud
+
+- [Accessing classical HANA DB Schema](https://github.com/stockbal/cap-samples/tree/classic-schema-sharing)
