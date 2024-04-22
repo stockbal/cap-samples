@@ -35,7 +35,11 @@ modules:
       buildpack: nodejs_buildpack
     requires:
       - name: classic-schema-sharing-db
-      - name: CC_ACCESS
+      - name: cross-container-service-1
+        group: SERVICE_REPLACEMENTS
+        properties:
+          key: ServiceName_1 # Will be used inside plain.hdbgrants
+          service: ~{the-service-name}
 
 resources:
   - name: classic-schema-sharing-db
@@ -43,6 +47,10 @@ resources:
     parameters:
       service: hana
       service-plan: hdi-shared
+      config:
+        # use custom schema name to easily find it inside HANA DB
+        schema: CLASSICAL_SCHEMA_SHARING
+
   - name: classic-schema-sharing-auth
     type: org.cloudfoundry.managed-service
     parameters:
@@ -52,8 +60,11 @@ resources:
       config:
         xsappname: classic-schema-sharing-${org}-${space}
         tenant-mode: dedicated
-    # User provided service to enable class schema access
-  - name: CC_ACCESS
+
+    # User provided service to enable classic schema access
+  - name: cross-container-service-1
     type: org.cloudfoundry.existing-service
     parameters:
       service-name: CC_ACCESS
+    properties:
+      the-service-name: ${service-name}

@@ -40,24 +40,32 @@ DELETE {{server}}/odata/v4/my/Books
 {{auth}}
 
 ###
+GET {{server}}/odata/v4/my/RegionsNative
+{{auth}}
+Content-Type: application/json
+
+###
+POST {{server}}/odata/v4/my/RegionsNative
+Content-Type: application/json
+{{auth}}
+
+{
+    "Region": "E",
+    "Description": "Europe"
+}
+
+###
+PATCH {{server}}/odata/v4/my/RegionsNative
+Content-Type: application/json
+{{auth}}
+
+{}
+
+###
+DELETE {{server}}/odata/v4/my/RegionsNative('E')
+{{auth}}
+
+###
+
 GET {{server}}/odata/v4/my/Regions
-{{auth}}
-Content-Type: application/json
-
-###
-POST {{server}}/odata/v4/my/Regions
-Content-Type: application/json
-{{auth}}
-
-{}
-
-###
-PATCH {{server}}/odata/v4/my/Regions
-Content-Type: application/json
-{{auth}}
-
-{}
-
-###
-DELETE {{server}}/odata/v4/my/Regions
 {{auth}}

@@ -1,5 +1,9 @@
 # Classic HANA Schema sharing with HDI in CAP
 
+> **Note**: Follow this [link](https://github.com/stockbal/cap-samples/tree/main) to show all available scenarios
+
+Small SAP CAP Project to demonstrate the access of HANA Cloud tables from a classical (non-HDI) schema.
+
 ## Create classic schema with table in HANA
 
 ```sql
@@ -10,6 +14,7 @@ CREATE USER PLUSR PASSWORD "HanaRocks01" SET USERGROUP DEFAULT;
 CREATE COLUMN TABLE "PLAIN"."REGIONS" (
 	REGION NVARCHAR(5),
 	DESCRIPTION NVARCHAR(100),
+	CATEGORY NVARCHAR(5),
 	PRIMARY KEY(REGION)
 );
 
