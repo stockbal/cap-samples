@@ -1,0 +1,32 @@
+{
+  "name": "classic-schema-sharing",
+  "version": "1.0.0",
+  "description": "Classic Schema access in SAP CAP",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^7",
+    "@sap/cds-hana": "^2",
+    "@sap/xssec": "^3",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7",
+    "rimraf": "^5.0.5"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "build": "rimraf gen mta_archives && npx -p mbt mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+    "get-env:srv": "cf de classic-schema-sharing-srv"
+  },
+  "cds": {
+    "requires": {
+      "[production]": {
+        "db": "hana",
+        "auth": "xsuaa"
+      }
+    }
+  }
+}
