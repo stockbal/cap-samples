@@ -38,11 +38,11 @@ To handle the shared table from the schema `PLAIN` during production as well as 
 To use this you should create db specific folders in the folder `/db`:
 
 ```
-  |-- db
-       |-- hana
-	   	    |-- index.cds
-       |-- sqlite
-	   	    |-- index.cds
+└── db
+    └── hana
+    |     └── index.cds
+    └── sqlite
+          └── index.cds
 ```
 
 For `sqlite` for enhance the table definition to include the skipped column that exists in HANA Cloud
