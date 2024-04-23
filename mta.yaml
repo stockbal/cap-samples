@@ -8,8 +8,10 @@ build-parameters:
   before-all:
     - builder: custom
       commands:
-        - npm ci
+        - npm i
         - npx cds build --production
+        - npx tsc 
+        - cp -r @cds-models gen/srv
 modules:
   - name: classic-schema-sharing-srv
     type: nodejs

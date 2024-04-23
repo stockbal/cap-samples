@@ -5,7 +5,7 @@ using {
     managed
 } from '@sap/cds/common';
 
-using {REGIONS} from './plain';
+using {Regions} from './plain';
 
 entity Books : cuid, managed {
     title : String;
@@ -13,7 +13,7 @@ entity Books : cuid, managed {
 
 // just a simple view to demonstrate the view creation on existing HANA Table
 define view RegionsView as
-    select from REGIONS {
-        REGION,
-        DESCRIPTION
+    select from Regions {
+        Region,
+        Description
     }

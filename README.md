@@ -4,7 +4,9 @@
 
 Small SAP CAP Project to demonstrate the access of HANA Cloud tables from a classical (non-HDI) schema.
 
-## Create classic schema with table in HANA
+## Preparations before first deployment to Cloud Foundry
+
+### Create classic schema with table in HANA
 
 ```sql
 CREATE SCHEMA "PLAIN";
@@ -23,7 +25,7 @@ grant  SELECT, UPDATE, INSERT, DELETE, EXECUTE, SELECT METADATA ON SCHEMA "PLAIN
 grant  CCROLE to PLUSR with admin option;
 ```
 
-## Create user provided service
+### Create user provided service
 
 ```shell
 cf cups CC_ACCESS -p "{\"user\":\"PLUSR\",\"password\":\"HanaRocks01\",\"tags\":[\"hana\"] , \"schema\" : \"PLAIN\" }"
