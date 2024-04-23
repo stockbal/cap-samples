@@ -24,7 +24,8 @@
     "build": "rimraf gen mta_archives && npx -p mbt mbt build --mtar archive",
     "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
     "undeploy": "cf undeploy classic-schema-sharing --delete-services --delete-service-keys",
-    "get-env:srv": "cf de classic-schema-sharing-srv"
+    "get-env:srv": "cf de classic-schema-sharing-srv",
+    "gen:types": "npx @cap-js/cds-typer \"*\" --outputDirectory @cds-models"
   },
   "cds": {
     "requires": {
