@@ -57,8 +57,7 @@ The last step so these configurations will take effect, is a `db-ext` entry in t
 
 ```json
   "cds": {
-	"requires": {
-	  ...
+    "requires": {
       "db-ext": {
         "[production]": {
           "model": "db/hana"
@@ -67,7 +66,6 @@ The last step so these configurations will take effect, is a `db-ext` entry in t
           "model": "db/sqlite"
         }
       }
-	  ...
-	}
+    }
   }
 ```
