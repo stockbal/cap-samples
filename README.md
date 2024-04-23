@@ -30,3 +30,44 @@ grant  CCROLE to PLUSR with admin option;
 ```shell
 cf cups CC_ACCESS -p "{\"user\":\"PLUSR\",\"password\":\"HanaRocks01\",\"tags\":[\"hana\"] , \"schema\" : \"PLAIN\" }"
 ```
+
+## Handle `@cds.existence.exists` during development with `cds watch`
+
+To handle the shared table from the schema `PLAIN` during production as well as during development, CAP provides a mechanism to provide specific configurations for each database.
+
+To use this you should create db specific folders in the folder `/db`:
+
+```
+  |-- db
+       |-- hana
+	   	    |-- index.cds
+       |-- sqlite
+	   	    |-- index.cds
+```
+
+For `sqlite` for enhance the table definition to include the skipped column that exists in HANA Cloud
+
+```cds
+annotate Regions with @cds.persistence.exists
+```
+
+For `hana` we annotate the entity with `@cds.persistence.exists` to prevent the creation of an `.hdbtable` file during the build.
+
+The last step so these configurations will take effect, is a `db-ext` entry in the `cds.requires` section of the `package.json` file:
+
+```json
+  "cds": {
+	"requires": {
+	  ...
+      "db-ext": {
+        "[production]": {
+          "model": "db/hana"
+        },
+        "[development]": {
+          "model": "db/sqlite"
+        }
+      }
+	  ...
+	}
+  }
+```

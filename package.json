@@ -31,6 +31,14 @@
       "[production]": {
         "db": "hana",
         "auth": "xsuaa"
+      },
+      "db-ext": {
+        "[production]": {
+          "model": "db/hana"
+        },
+        "[development]": {
+          "model": "db/sqlite"
+        }
       }
     }
   },
