@@ -21,6 +21,7 @@
   },
   "scripts": {
     "start": "cds-serve",
+    "watch": "cds-ts watch",
     "build": "rimraf gen mta_archives && npx -p mbt mbt build --mtar archive",
     "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
     "undeploy": "cf undeploy classic-schema-sharing --delete-services --delete-service-keys",
