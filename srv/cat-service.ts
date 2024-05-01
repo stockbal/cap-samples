@@ -1,13 +1,18 @@
 import { log } from "@sap/cds";
-import { Books, Book } from "#cds-models/CatalogService";
+import { Book, Books } from "#cds-models/CatalogService";
 import { BaseService } from "./base-service";
 
 export class CatalogService extends BaseService {
   override async init(): Promise<void> {
     const bookLogger = log("book");
 
-    this.before("SAVE", Book, async (req) => {
-      if (req.data.stock && req.data.stock > 1000) {
+    // HINT: not working with jest
+    // const { Book, Books } = await import("#cds-models/CatalogService");
+
+    this.before("SAVE", Books, async (req) => {
+      bookLogger.info("BEFORE SAVE");
+
+      if ((req.data as Book).stock && (req.data as Book).stock! > 1000) {
         req.error({ code: "422", message: "INVALID_STOCK" });
       }
     });
@@ -16,7 +21,7 @@ export class CatalogService extends BaseService {
       bookLogger.info(`After READ '${req.target.name}'`, books);
     });
 
-    this.before("DELETE", Books, (req) => {
+    this.before("DELETE", Book, async (req) => {
       bookLogger.info("BEFORE DELETE " + req.target);
     });
 
@@ -24,6 +29,6 @@ export class CatalogService extends BaseService {
       bookLogger.info(`After READ '${req.target.name}'`, books);
     });
 
-    await super.init();
+    return super.init();
   }
 }
