@@ -12,7 +12,7 @@
     "express": "^4"
   },
   "devDependencies": {
-    "@cap-js/cds-typer": "^0.19.0",
+    "@cap-js/cds-typer": "^0.20.2",
     "@cap-js/sqlite": "^1",
     "@sap/cds-dk": "^7",
     "@tsconfig/node20": "^20.1.4",
@@ -22,7 +22,7 @@
     "rimraf": "^5.0.5",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.5"
   },
   "scripts": {
     "start": "cds-serve",
