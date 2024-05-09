@@ -1,15 +1,16 @@
 {
   "name": "draft-composition-of-one",
   "version": "1.0.0",
-  "description": "A CAP sample",
+  "description": "Sample for CAP with draft composition of one",
   "private": true,
   "dependencies": {
-    "@sap/cds": "^6",
+    "@sap/cds": "^7",
     "express": "^4"
   },
   "devDependencies": {
-    "@sap/ux-specification": "^1.108.5",
-    "sqlite3": "^5.0.4"
+    "@cap-js/sqlite": "^1",
+    "@sap/eslint-plugin-cds": "^3",
+    "eslint": "^9"
   },
   "scripts": {
     "start": "cds run",

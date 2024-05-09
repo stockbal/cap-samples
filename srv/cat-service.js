@@ -1,15 +1,16 @@
-module.exports = cds.service.impl(async function () {
-  const Books = this.entities["Books"];
-  const Distributors = this.entities["Distributors"];
+const cds = require("@sap/cds");
 
-  this.after("NEW", Books, async (data) => {
-    // manual creation of draft entries for 1:1 composition relations
-    await INSERT.into(Distributors.drafts).entries({
-      book_ID: data.ID,
-      DraftAdministrativeData_DraftUUID: data.DraftAdministrativeData_DraftUUID,
-      IsActiveEntity: false,
-      HasDraftEntity: false,
-      HasActiveEntity: false,
+module.exports = class CatalogService extends cds.ApplicationService {
+  async init() {
+    const { Books } = this.entities;
+
+    this.before("NEW", Books.drafts, async (req) => {
+      // manual creation of draft entries for 1:1 composition relations
+      if (!req.data.distributor) {
+        req.data.distributor = { name: "Default Distributor" };
+      }
     });
-  });
-});
+
+    return super.init();
+  }
+};

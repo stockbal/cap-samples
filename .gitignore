@@ -9,6 +9,7 @@ gen/
 dist/
 node_modules/
 target/
+coverage/
 
 # Web IDE, App Studio
 .che/
