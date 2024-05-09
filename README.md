@@ -10,7 +10,7 @@ CAP is not able to create a draft entry for the `1:1` relation if there is not a
 
 ### Method before CDS 7 and own draft event handlers
 
-This has to be manually implemented in the `after` handler of the `NEW` event of the root entity (see [handler](./srv/cat-service.js)).
+This has to be manually implemented in the `after` handler of the `NEW` event of the root entity (see [handler](https://github.com/stockbal/cap-samples/blob/ea44c9f27d6d298d449bf598319258a38e496936/srv/cat-service.js)).
 
 ### Method with CDS 7 and own draft event handlers
 
