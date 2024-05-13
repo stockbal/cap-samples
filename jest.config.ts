@@ -14,10 +14,7 @@ const config: Config = {
   rootDir: "./srv",
   globalSetup: "../jest.setup.ts",
   collectCoverageFrom: ["<rootDir>/**/*.ts"],
-  coveragePathIgnorePatterns: [
-    "<rootDir>/../@cds-models/",
-    "<rootDir>/types/",
-  ],
+  coveragePathIgnorePatterns: ["<rootDir>/../@cds-models/", "<rootDir>/types/"],
   coverageDirectory: "../coverage",
   verbose: true,
   collectCoverage: true,

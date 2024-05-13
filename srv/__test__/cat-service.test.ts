@@ -1,5 +1,6 @@
 import cds from "@sap/cds";
 import { Book } from "#cds-models/CatalogService";
+import { DraftEntity } from "../types/util";
 
 describe("Testsuite: Catalog Service", () => {
   const {
@@ -21,13 +22,16 @@ describe("Testsuite: Catalog Service", () => {
     });
 
     it("+ Create new Book Draft", async () => {
-      const { data: newBook } = await POST<Book>(`${BOOKS_PATH}`, {
-        title: "New Book",
-        stock: 10,
-      } as Book);
+      const { data: newBook } = await POST<Book & DraftEntity>(
+        `${BOOKS_PATH}`,
+        {
+          title: "New Book",
+          stock: 10,
+        } as Book
+      );
 
       expect(newBook.title).toBe("New Book");
-      expect((newBook as DraftEntity).IsActiveEntity).toBe(false);
+      expect(newBook.IsActiveEntity).toBe(false);
     });
 
     it("+ Save new Book Draft", async () => {

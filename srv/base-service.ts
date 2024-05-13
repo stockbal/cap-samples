@@ -1,15 +1,31 @@
 import { ApplicationService } from "@sap/cds";
+import { Request } from "@sap/cds";
+import { NonNullEntity } from "./types/util";
 
 export class BaseService extends ApplicationService {
   /**
-   * Retrieves 'drafts' property from the given cds entity
-   * @param entity typed entity from CDS model
-   * @returns returns drafts definition typed to the given entity
+   * Registers handler that is executed after the READ event
    */
-  protected drafts<T extends object>(entity: T): T {
-    if ("drafts" in entity) {
-      return entity.drafts as T;
-    }
-    throw new Error("'drafts' not available on given object");
+  protected afterRead<T extends abstract new (...args: any) => any>(
+    entity: T,
+    handler: (
+      data: NonNullEntity<InstanceType<T>>,
+      req: Request
+    ) => Promise<T | void | Error> | T | void | Error
+  ) {
+    this.after("READ", entity as any, handler);
+  }
+
+  /**
+   * Registers handler that is executed after the READ event for each found entry
+   */
+  protected afterReadEach<T extends abstract new (...args: any) => any>(
+    entity: T,
+    handler: (
+      data: NonNullEntity<InstanceType<T>>,
+      req: Request
+    ) => T | void | Error
+  ) {
+    this.after("each", entity as any, handler);
   }
 }

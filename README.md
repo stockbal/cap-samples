@@ -46,3 +46,12 @@ export function _BookAspect<TBase extends new (...args: any[]) => any>(Base: TBa
 If the return type of the generated aspect functions would be changed to `object` instead, the typescript compiler produces the expected syntax errors (see [cat-service.ts](./srv/cat-service.ts)).
 
 **Note**: Fixed with <https://github.com/cap-js/cds-typer/pull/28>
+
+### Testing with ts-jest
+
+If dynamic imports are inside handler or test code, node might have to be executed with an [additional option](https://jestjs.io/docs/ecmascript-modules):
+
+```json
+  "test": "node --experimental-vm-modules node_modules/jest/bin/jest"
+```
+

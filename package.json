@@ -34,7 +34,7 @@
     "gen:types": "npx @cap-js/cds-typer \"*\" --outputDirectory @cds-models",
     "watch": "cds-ts watch",
     "cf:de": "cf de cap-type-generator-srv",
-    "test": "jest"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest"
   },
   "imports": {
     "#cds-models/*": "./@cds-models/*/index.js"
