@@ -1,0 +1,8 @@
+@server = http://localhost:4004
+@auth = Authorization: Basic alice:
+
+
+### CatalogService.Books
+GET {{server}}/odata/v4/catalog/Books
+Content-Type: application/json
+{{auth}}

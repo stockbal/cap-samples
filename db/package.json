@@ -1,0 +1,21 @@
+{
+  "name": "@devepos/db",
+  "version": "1.0.0",
+  "private": true,
+  "files": [
+    "index.cds"
+  ],
+  "main": "index.js",
+  "dependencies": {
+    "@sap/cds": "^7",
+    "@cap-js/hana": "^0.4.0"
+  },
+  "scripts": {
+    "build": "cds build --production"
+  },
+  "cds": {
+    "requires": {
+      "db": "hana"
+    }
+  }
+}

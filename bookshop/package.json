@@ -1,0 +1,32 @@
+{
+  "name": "@devepos/bookshop",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "files": [
+    "db/schema.cds",
+    "srv/cat-service.cds"
+  ],
+  "dependencies": {
+    "@sap/cds": "^7",
+    "express": "^4",
+    "@devepos/common": "1.0.0"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/eslint-plugin-cds": "^3",
+    "eslint": "^8",
+    "cds-plugin-ui5": "^0.6.13"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "build": "cds build --production --ws-pack",
+    "watch": "cds watch",
+    "watch-project1": "cds watch --open project1/index.html?sap-ui-xx-viewCache=false --livereload false"
+  },
+  "sapux": [
+    "app/project1"
+  ]
+}
