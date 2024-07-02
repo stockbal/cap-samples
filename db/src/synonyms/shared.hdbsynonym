@@ -1,0 +1,26 @@
+{
+  "COM_PLAIN_REGIONS": {
+    "target": {
+      "object": "REGIONS",
+      "schema": "PLAIN"
+    }
+  },
+  "COM_FOREIGN_COUNTRIES": {
+    "target": {
+      "object": "COUNTRIES",
+      "schema": "FOREIGN"
+    }
+  },
+  "COM_FOREIGN_CURRENCIES": {
+    "target": {
+      "object": "CURRENCIES",
+      "schema": "FOREIGN"
+    }
+  },
+  "COM_PLAIN_MATERIALTEXTS": {
+    "target": {
+      "object": "MATERIALTEXTS",
+      "schema": "PLAIN"
+    }
+  }
+}

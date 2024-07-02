@@ -31,6 +31,42 @@ grant  CCROLE to PLUSR with admin option;
 cf cups CC_ACCESS -p "{\"user\":\"PLUSR\",\"password\":\"HanaRocks01\",\"tags\":[\"hana\"] , \"schema\" : \"PLAIN\" }"
 ```
 
+### Granting the created role to the HDI container user
+
+So the HDI container user is able to create the synonyms and access the objects underneath the synonyms we have to create
+an [`.hdbgrants`](./db/cfg/shared.hdbgrants) file with the appropriate roles. These roles will then be granted to the HDI container users via the created user provided service.
+
+The syntax for such a file can be viewed [here](https://help.sap.com/docs/hana-cloud-database/sap-hana-cloud-sap-hana-database-developer-guide-for-cloud-foundry-multitarget-applications-sap-business-app-studio/syntax-options-in-hdbgrants-file).
+
+## Mapping synonyms to CDS namespaces
+
+To prevent any access issues it's best to write the synonym names always in uppercase letters.  
+To prevent any naming collisions we can still map the synonym to a CDS namespace. Namespace parts need to be concatenated with `_`.
+
+[`/db/src/synonyms/shared.hdbsynonym`](./db/src/synonyms/shared.hdbsynonym)  
+```json
+{
+  "COM_PLAIN_REGIONS": {
+    "target": {
+      "object": "REGIONS",
+      "schema": "PLAIN"
+    }
+  }
+}
+```
+
+The capitalization of the CDS entity does not matter then. We could also write it like `ReGiOnS`.
+
+[`/db/schema/plain.cds`](./db/schemas/plain.cds)  
+```cds
+namespace com.plain;
+
+entity Regions {
+    key Region      : String(5);
+        Description : String(100);
+}
+```
+
 ## Handle `@cds.existence.exists` during development with `cds watch`
 
 To handle the shared table from the schema `PLAIN` during production as well as during development, CAP provides a mechanism to provide specific configurations for each database.

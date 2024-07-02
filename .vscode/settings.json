@@ -1,3 +1,12 @@
 {
-  "cds.typeGenerator.enabled": true
+  "cds.typeGenerator.enabled": true,
+  "files.associations": {
+    "*.hdbtable": "sql",
+    "*.hdbview": "sql",
+    "*.hdbprocedure": "sql",
+    ".hdinamespace": "json",
+    "*.hdbsynonym": "json",
+    "*.hdbgrants": "json",
+    "*.hdiconfig": "json"
+  }
 }

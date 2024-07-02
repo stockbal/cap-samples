@@ -1,6 +1,6 @@
-using {Regions} from '../schemas/plain';
+using {com.plain} from '../schemas/plain';
 
 // provide 'category' column for sqlite so native query execution is possible
-extend Regions with {
+extend plain.Regions with {
     Category : String(5);
 }

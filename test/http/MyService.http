@@ -3,9 +3,7 @@ POST {{$dotenv uaaUrl}}/oauth/token
 Authorization: Basic {{$dotenv clientId}}:{{$dotenv clientSecret}}
 Content-Type: application/x-www-form-urlencoded
 
-grant_type=password
-&username={{$dotenv user}}
-&password={{$dotenv pw}}
+grant_type=client_credentials
 
 ###
 
@@ -15,12 +13,17 @@ grant_type=password
 # @server = http://localhost:4004
 # @auth = Authorization: Basic Alice:
 
-###
+### Get $metadata
+GET {{server}}/odata/v4/my/$metadata
+{{auth}}
+
+### Read Books
+# @name books
 GET {{server}}/odata/v4/my/Books
 {{auth}}
 Content-Type: application/json
 
-###
+### Create New Book
 POST {{server}}/odata/v4/my/Books
 Content-Type: application/json
 {{auth}}
@@ -29,44 +32,43 @@ Content-Type: application/json
     "title": "Harry Potter and the Half-Blood Prince"
 }
 
-###
-PATCH {{server}}/odata/v4/my/Books
+### Update Book
+PATCH {{server}}/odata/v4/my/Books(ID={{books.response.body.value[0].ID}})
 Content-Type: application/json
 {{auth}}
 
-{}
+{
+    "title": "Harry Potter and the philosopher's stone"
+}
 
-###
-DELETE {{server}}/odata/v4/my/Books
-{{auth}}
-
-###
+### Read Regions via native wrapper view around shared view from schema "PLAIN"
 GET {{server}}/odata/v4/my/RegionsNative
 {{auth}}
 Content-Type: application/json
 
-###
+### Create new Region via native wrapper view around shared view from schema "PLAIN"
 POST {{server}}/odata/v4/my/RegionsNative
 Content-Type: application/json
 {{auth}}
 
 {
     "Region": "E",
-    "Description": "Europe"
+    "Description": "Europ"
 }
 
-###
-PATCH {{server}}/odata/v4/my/RegionsNative
+### Updates a given region
+PATCH {{server}}/odata/v4/my/RegionsNative('E')
 Content-Type: application/json
 {{auth}}
 
-{}
+{
+    "Description": "Europe"
+}
 
-###
+### Delete a given Region
 DELETE {{server}}/odata/v4/my/RegionsNative('E')
 {{auth}}
 
-###
-
+### Executes native Query via the created synonym
 GET {{server}}/odata/v4/my/Regions
 {{auth}}
