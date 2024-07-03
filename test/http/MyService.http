@@ -41,6 +41,10 @@ Content-Type: application/json
     "title": "Harry Potter and the philosopher's stone"
 }
 
+### Delete book
+DELETE  {{server}}/odata/v4/my/Books(ID={{books.response.body.value[0].ID}})
+{{auth}}
+
 ### Read Regions via native wrapper view around shared view from schema "PLAIN"
 GET {{server}}/odata/v4/my/RegionsNative
 {{auth}}
