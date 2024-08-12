@@ -10,6 +10,7 @@ Each scenario is realized in a dedicated branch of this repository.
 - [Remote API in Free Style with FPM](https://github.com/stockbal/cap-samples/tree/remote-srv-fpm)
 - [Using remote API as a value help entity - 1:N association](https://github.com/stockbal/cap-samples/tree/remote-srv-vh-complex)
 - [Using remote API as a value help entity - 1:N association (simple coding version) + showing the associated data on the list page (=expand)](https://github.com/stefannothaft/cap-samples/tree/remote-srv-vh-simple-with-expand-on-list-page)
+- [Using media stream from remote API](https://github.com/stockbal/cap-samples/tree/remote-srv-media-stream)
 
 ## Draft-enabled services
 
