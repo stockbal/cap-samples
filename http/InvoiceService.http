@@ -1,0 +1,12 @@
+@server = http://localhost:4004
+@auth = Authorization: Basic alice:
+
+
+### READ InvoiceService.Invoices PDF
+GET {{server}}/odata/v4/invoice/Invoices(ContractId='1',InvoiceId='1')/FileContent
+accept: application/pdf
+{{auth}}
+
+### READ InvoiceService.Invoices
+GET {{server}}/odata/v4/invoice/Invoices
+{{auth}}

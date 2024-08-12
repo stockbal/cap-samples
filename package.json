@@ -1,0 +1,37 @@
+{
+  "name": "media-streaming-remote",
+  "version": "1.0.0",
+  "description": "CAP project to show media streaming via remote entity",
+  "repository": "https://github.com/stockbal/cap-samples.git",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "@sap-cloud-sdk/http-client": "^3.18.0",
+    "@sap-cloud-sdk/resilience": "^3.18.0",
+    "@sap/cds": "^7",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/eslint-plugin-cds": "^3",
+    "@types/express": "^4.17.21",
+    "eslint": "^9"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch:hybrid": "cds w --profile hybrid"
+  },
+  "cds": {
+    "requires": {
+      "ExtAPI": {
+        "kind": "odata",
+        "model": "srv/external/ExtAPI",
+        "[hybrid]": {
+          "credentials": {
+            "destination": "ABAP_BACKEND"
+          }
+        }
+      }
+    }
+  }
+}
