@@ -4,6 +4,10 @@ This repository showcases features and scenarios for the SAP Cloud Application P
 
 Each scenario is realized in a dedicated branch of this repository.
 
+## Guides about various topics
+
+- [Return detail / longtext errors to Fiori Elements app](https://github.com/stockbal/cap-samples/tree/guide-service-errors-in-fe)
+
 ## Remote Services
 
 - [Remote API in Fiori Elements](https://github.com/stockbal/cap-samples/tree/remote-srv-fe-usage)
