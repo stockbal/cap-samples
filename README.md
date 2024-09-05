@@ -69,7 +69,7 @@ var DEFAULT_ASYNC_HANDLERS = {
 
 ## Create actual error message from CAP
 
-Now comes the part, interesting for CAP developers. How to actually create detail or longtext errors.
+Now comes the interesting part, how to actually create detail or longtext errors from CAP application code.
 
 ### Create error in application code
 
