@@ -6,7 +6,7 @@ Short documentation how to return detail errors or even long text errors via `re
 
 ## Information from Debugging UI5
 
-The following provides a view insights into what attributes of a service message are passed to a message object that is later used in the MessageView control.
+The following provides a few insights into what attributes of a service message are passed to a message object that is later used in the MessageView control.
 
 ### Create Message from Service Error Message
 
