@@ -1,6 +1,6 @@
 const { executeHttpRequest } = require("@sap-cloud-sdk/http-client");
 const { ApplicationService } = require("@sap/cds");
-const cds = require("@sap/cds/libx/_runtime/cds");
+const cds = require("@sap/cds");
 
 module.exports = class InvoiceService extends ApplicationService {
   async init() {
