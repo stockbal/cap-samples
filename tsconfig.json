@@ -5,7 +5,11 @@
     "rootDir": "./",
     "paths": {
       "#cds-models/*": ["./@cds-models/*"]
-    }
+    },
+    "typeRoots": [
+      "./node_modules/@types",
+      "./node_modules/@cap-js/cds-types/dist"
+    ]
   },
   "include": ["srv/**/*"]
 }

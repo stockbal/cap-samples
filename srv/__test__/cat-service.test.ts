@@ -1,5 +1,5 @@
 import cds from "@sap/cds";
-import { Book } from "#cds-models/CatalogService";
+import { Book, Books } from "#cds-models/CatalogService";
 import { DraftEntity } from "../types/util";
 
 describe("Testsuite: Catalog Service", () => {
@@ -17,8 +17,10 @@ describe("Testsuite: Catalog Service", () => {
   describe("CRUD Books", () => {
     const BOOKS_PATH = "/odata/v4/catalog/Books";
 
-    beforeEach(() => {
+    beforeEach(async () => {
       testData.delete();
+
+      await INSERT.into(Books).entries({ stock: 10, title: "Dune" } as Book);
     });
 
     it("+ Create new Book Draft", async () => {

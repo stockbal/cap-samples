@@ -1,5 +1,4 @@
-import { ApplicationService } from "@sap/cds";
-import { Request } from "@sap/cds";
+import { ApplicationService, Request } from "@sap/cds";
 import { NonNullEntity } from "./types/util";
 
 export class BaseService extends ApplicationService {

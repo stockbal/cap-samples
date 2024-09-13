@@ -2,7 +2,7 @@ import { log } from "@sap/cds";
 import { BaseService } from "./base-service";
 import { Book, Books } from "#cds-models/CatalogService";
 
-export class CatalogService extends BaseService {
+export default class CatalogService extends BaseService {
   override async init(): Promise<void> {
     const bookLogger = log("book");
 

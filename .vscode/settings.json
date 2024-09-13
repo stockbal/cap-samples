@@ -1,9 +1,5 @@
 {
   "cds.typeGenerator.enabled": true,
-  "jestrunner.jestCommand": "node --experimental-vm-modules node_modules/jest/bin/jest",
-  "jestrunner.debugOptions": {
-    "env": {
-      "NODE_OPTIONS": "--experimental-vm-modules"
-    }
-  }
+  "cds.typeGenerator.command": "node \"${typerBinary}\" \"${targetFile}\" --outputDirectory \"${outputDirectory}\" --useEntitiesProxy true",
+  "jestrunner.jestCommand": "node --experimental-vm-modules node_modules/jest/bin/jest"
 }
