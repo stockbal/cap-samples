@@ -6,6 +6,7 @@
 
 # @name foundBooks
 GET /odata/v4/catalog/Books
+    ?$filter=(IsActiveEntity eq false or SiblingEntity/IsActiveEntity eq null)
 Host: {{host}}
 
 ###

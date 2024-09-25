@@ -1,8 +1,7 @@
-import { log } from "@sap/cds";
-import { BaseService } from "./base-service";
 import { Book, Books } from "#cds-models/CatalogService";
+import { ApplicationService, log } from "@sap/cds";
 
-export default class CatalogService extends BaseService {
+export default class CatalogService extends ApplicationService {
   override async init(): Promise<void> {
     const bookLogger = log("book");
 
@@ -14,15 +13,13 @@ export default class CatalogService extends BaseService {
       }
     });
 
-    this.afterRead(Books, (_data, req) => {
-      bookLogger.info(`After ${req.event} ${req.target}`);
+    this.after("each", Books, (data) => {
+      console.log("After each Book");
+      console.log(data);
     });
 
-    this.afterReadEach(Book, (book, req) => {
-      bookLogger.info(`After ${req.event} ${req.target} with key ${book.ID}`);
-    });
-
-    this.afterRead(Books.drafts, (books, req) => {
+    this.after("READ", Books.drafts, (data, req) => {
+      const books = data as Books;
       bookLogger.info(`After ${req.event} '${req.target.name}'`, books);
     });
 
