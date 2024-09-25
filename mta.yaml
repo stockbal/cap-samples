@@ -9,7 +9,7 @@ build-parameters:
     - builder: custom
       commands:
         - npm ci
-        - npm run build:cf
+        - npx cds build --production
 modules:
   - name: cap-type-generator-srv
     type: nodejs

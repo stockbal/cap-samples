@@ -17,7 +17,8 @@ const config: Config = {
   coveragePathIgnorePatterns: ["<rootDir>/../@cds-models/", "<rootDir>/types/"],
   coverageDirectory: "../coverage",
   verbose: true,
-  collectCoverage: true
+  collectCoverage: true,
+  silent: true
 };
 
 export default config;

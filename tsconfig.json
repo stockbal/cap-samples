@@ -4,12 +4,10 @@
     "outDir": "gen/srv",
     "rootDir": "./",
     "paths": {
-      "#cds-models/*": ["./@cds-models/*"]
+      "#cds-models/*": ["./@cds-models/*/index.ts"]
     },
-    "typeRoots": [
-      "./node_modules/@types",
-      "./node_modules/@cap-js/cds-types/dist"
-    ]
+    "typeRoots": ["./node_modules/@types"]
   },
+  "files": ["./node_modules/@cap-js/cds-types/dist/cds-types.d.ts"],
   "include": ["srv/**/*"]
 }

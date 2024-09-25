@@ -9,15 +9,16 @@
     "@cap-js/hana": "^1.2.0",
     "@sap/cds": "^8",
     "@sap/xssec": "^4",
-    "express": "^4"
+    "express": "^4.21.0"
   },
   "devDependencies": {
-    "@cap-js/cds-typer": "^0.26.0",
+    "@cap-js/cds-typer": "https://github.com/cap-js/cds-typer.git#fix/build-task-output",
     "@cap-js/cds-types": "^0.6.5",
     "@cap-js/sqlite": "^1",
     "@sap/cds-dk": "^8",
     "@tsconfig/node20": "^20.1.4",
     "@types/jest": "^29.5.13",
+    "@types/node": "^20",
     "axios": "^1.7.7",
     "jest": "^29.7.0",
     "npm-run-all": "^4.1.5",
@@ -30,9 +31,6 @@
     "start": "cds-serve",
     "build": "rimraf mta_archives && npx -p mbt mbt build --mtar archive",
     "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
-    "build:cf": "run-s build:cds gen:types copy:types",
-    "build:cds": "cds build --production",
-    "gen:types": "npx @cap-js/cds-typer \"*\" --outputDirectory @cds-models --useEntitiesProxy true",
     "copy:types": "cp -r @cds-models gen/srv",
     "watch": "cds-ts watch",
     "cf:de": "cf de cap-type-generator-srv",
@@ -42,6 +40,9 @@
     "#cds-models/*": "./@cds-models/*/index.js"
   },
   "cds": {
+    "typer": {
+      "useEntitiesProxy": true
+    },
     "requires": {
       "[production]": {
         "auth": "xsuaa",
