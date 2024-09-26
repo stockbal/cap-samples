@@ -1,0 +1,15 @@
+{
+  "tabWidth": 2,
+  "printWidth": 120,
+  "trailingComma": "none",
+  "useTabs": false,
+  "singleQuote": false,
+  "endOfLine": "lf",
+  "overrides": [
+    {
+      "files": ["*.json", "*.yaml", ".eslint*", ".prettier*"],
+      "options": { "tabWidth": 2 }
+    },
+    { "files": ["*.test.ts"], "options": { "printWidth": 160 } }
+  ]
+}
