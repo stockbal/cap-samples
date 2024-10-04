@@ -11,18 +11,40 @@ UI: {
   LineItem           : [
     {Value: title},
     {Value: stock},
-    {Value: publishedOn}
+    {Value: publishedOn},
+    {Value: author_firstName},
+    {Value: author_lastName},
+    {Value: author_address_zip},
+    {Value: author_address_place},
   ],
   FieldGroup #General: {
     $Type: 'UI.FieldGroupType',
     Data : [
       {Value: title},
       {Value: stock},
-      {Value: publishedOn}
+      {Value: publishedOn},
+      {Value: retailPrice}
     ],
   },
-  Facets             : [{
-    $Type : 'UI.ReferenceFacet',
-    Target: '@UI.FieldGroup#General',
-  }, ],
+  FieldGroup #author : {
+    $Type: 'UI.FieldGroupType',
+    Data : [
+      {Value: author_firstName},
+      {Value: author_lastName},
+      {Value: author_address_zip},
+      {Value: author_address_place}
+    ]
+  },
+  Facets             : [
+    {
+      $Type : 'UI.ReferenceFacet',
+      Label : 'General',
+      Target: '@UI.FieldGroup#General',
+    },
+    {
+      $Type : 'UI.ReferenceFacet',
+      Label : 'Author',
+      Target: '@UI.FieldGroup#author'
+    }
+  ]
 });

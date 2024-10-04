@@ -1,3 +1,3 @@
-ID;title;stock;publishedOn
-a6eab5ad-5cb5-4962-bf2e-40da704ef793;Wuthering Heights;100;1847-12-07
-36da37e3-90e1-4fe2-82c8-9f3372dde22f;Jane Eyre;500;1847-10-19
+ID;title;stock;publishedOn;author_firstName;author_lastName;author_address_place;author_address_zip;retailPrice;currency_code
+a6eab5ad-5cb5-4962-bf2e-40da704ef793;Wuthering Heights;100;1847-12-07;Jane;Auston;Chawton;GU34 1SD;14.99;USD
+36da37e3-90e1-4fe2-82c8-9f3372dde22f;Jane Eyre;500;1847-10-19;Jane;Auston;Chawton;GU34 1SD;10.99;USD

@@ -12,7 +12,7 @@
     "express": "^4.21.0"
   },
   "devDependencies": {
-    "@cap-js/cds-typer": "https://github.com/cap-js/cds-typer.git",
+    "@cap-js/cds-typer": ">=0.27",
     "@cap-js/cds-types": "^0.6.5",
     "@cap-js/sqlite": "^1",
     "@sap/cds-dk": "^8",
@@ -37,7 +37,7 @@
     "start": "cds-serve",
     "build": "rimraf mta_archives && npx -p mbt mbt build --mtar archive",
     "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
-    "copy:types": "cp -r @cds-models gen/srv",
+    "gen:types": "npx @cap-js/cds-typer '*'",
     "watch": "cds-ts watch",
     "cf:de": "cf de cap-type-generator-srv",
     "test": "jest --silent"
@@ -47,7 +47,9 @@
   },
   "cds": {
     "typer": {
-      "useEntitiesProxy": true
+      "useEntitiesProxy": true,
+      "outputDirectory": "@cds-models",
+      "inlineDeclarations": "flat"
     },
     "requires": {
       "[production]": {

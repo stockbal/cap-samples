@@ -1,4 +1,3 @@
 {
-  "cds.typeGenerator.enabled": true,
-  "jestrunner.jestCommand": "node --experimental-vm-modules node_modules/jest/bin/jest"
+  "cds.typeGenerator.enabled": true
 }
