@@ -1,4 +1,4 @@
-# Demonstrates new `@cap-js/typer` type generator with CAP 8
+# Demonstrates new `@cap-js/typer` type generator with CDS 8
 
 > **Note**: Follow this [link](https://github.com/stockbal/cap-samples/tree/main) to show all available scenarios
 
