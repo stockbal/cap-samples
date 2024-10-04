@@ -10,7 +10,7 @@ Currently cds-typer generates named type elements like reflected in the linked C
 
 #### Sample
 
-// schema.cds
+`// schema.cds`
 
 ```cds
 type Author {
@@ -24,7 +24,7 @@ entity Books : cuid {
 }
 ```
 
-// index.ts
+`// index.ts`
 
 ```ts
 export function _BookAspect<TBase extends new (...args: any[]) => object>(Base: TBase) {
