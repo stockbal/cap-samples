@@ -8,6 +8,6 @@
     },
     "typeRoots": ["./node_modules/@types"]
   },
-  "files": ["./node_modules/@cap-js/cds-types/dist/cds-types.d.ts"],
+  "files": ["node_modules/@cap-js/cds-types/dist/cds-types.d.ts"],
   "include": ["srv/**/*"]
 }

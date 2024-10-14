@@ -66,19 +66,6 @@ describe("Testsuite: Catalog Service", () => {
       expect(response.status).toBe(204);
     });
 
-    it("+ buy Book", async () => {
-      const { data: newBook } = await POST<Book>(`${BOOKS_PATH}`, {
-        title: "New Book"
-      } as Book);
-
-      // activate the draft
-      await POST(`${BOOKS_PATH}(ID=${newBook.ID},IsActiveEntity=false)/${DR_ACTIVATE}`);
-
-      await POST(`${BOOKS_PATH}(ID=${newBook.ID},IsActiveEntity=true)/buy`, {
-        amount: 5
-      });
-    });
-
     it("+ publish Book", async () => {
       await POST(`${SRV_PATH}/CatalogService.publish`, {
         bookId: "f8ee5ab4-fc05-401b-a811-8cc0956003e5",

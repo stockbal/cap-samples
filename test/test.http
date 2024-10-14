@@ -6,7 +6,9 @@
 
 # @name foundBooks
 GET /odata/v4/catalog/Books
-    ?$filter=(IsActiveEntity eq false or SiblingEntity/IsActiveEntity eq null)
+    # ?$filter=(IsActiveEntity eq false or SiblingEntity/IsActiveEntity eq null)
+    ?$filter=(IsActiveEntity eq false)
+    &$count=true
 Host: {{host}}
 
 ###
@@ -78,4 +80,31 @@ Content-Type: application/json
 
 {}
 
-###
+### sum 2 numbers
+POST /odata/v4/catalog/sum
+Host: {{host}}
+Content-Type: application/json
+
+{"x": 4, "y": 5}
+
+
+### lock employee
+POST /odata/v4/catalog/Employees(id=1149184,employeeId=1149184)/lock
+Host: {{host}}
+Content-Type: application/json
+
+{ "endDate": "9999-12-31" }
+
+### Buy Book
+POST /odata/v4/catalog/Books(ID=cdb33d05-bd0e-4c47-97b6-aa5df2f2c717,IsActiveEntity=true)/buy
+Host: {{host}}
+Content-Type: application/json
+
+{ "amount": 4 }
+
+### change leader of company
+POST /odata/v4/catalog/Companies(ID='google')/changeLeader
+Host: {{host}}
+Content-Type: application/json
+
+{ "leaderName": "John Doe"}

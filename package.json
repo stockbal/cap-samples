@@ -47,9 +47,10 @@
   },
   "cds": {
     "typer": {
-      "useEntitiesProxy": true,
-      "outputDirectory": "@cds-models",
-      "inlineDeclarations": "flat"
+      "use_entities_proxy": true,
+      "log_level": "ERROR",
+      "inline_declarations": "flat",
+      "output_directory": "@cds-models"
     },
     "requires": {
       "[production]": {

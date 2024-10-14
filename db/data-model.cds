@@ -5,21 +5,26 @@ using {
   managed,
   Currency
 } from '@sap/cds/common';
-
-type Author {
-  firstName : String(60) @title: 'First Name';
-  lastName  : String(60) @title: 'Last Name';
-  address   : {
-    place   : String(30) @title: 'Street';
-    zip     : String(10) @title: 'ZIP Code';
-  };
-}
+using {common} from './common';
 
 entity Books : managed, cuid {
-  title       : String          @title: 'Title';
-  stock       : Integer         @title: 'Stock';
-  currency    : Currency        @title: 'Currency'      @Common.IsCurrency;
-  retailPrice : Decimal(10, 2)  @title: 'Retail Price'  @Measures.ISOCurrency: currency_code;
-  author      : Author;
-  publishedOn : Date            @title: 'Published On';
+  title       : localized String @title: 'Title';
+  stock       : Integer          @title: 'Stock';
+  currency    : Currency         @title: 'Currency'      @Common.IsCurrency;
+  retailPrice : Decimal(10, 2)   @title: 'Retail Price'  @Measures.ISOCurrency: currency_code;
+  genre       : String enum {
+    Action;
+    Fantasy;
+  };
+  author      : common.Author;
+  publishedOn : Date             @title: 'Published On';
+
+  publishers  : Composition of many Publishers
+                  on publishers.book = $self;
+}
+
+
+entity Publishers : managed, cuid {
+  name : String(255);
+  book : Association to Books;
 }
