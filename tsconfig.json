@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    "outDir": "./gen/srv",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "paths": {
+      "#cds-models/*": ["./@cds-models/*/index.ts"]
+    }
+  },
+  "include": ["./srv/**/*.ts"],
+  "files": ["./node_modules/@cap-js/cds-types/dist/cds-types.d.ts"]
+}
