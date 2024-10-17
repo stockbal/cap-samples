@@ -1,11 +1,11 @@
 import cds, { ApplicationService } from "@sap/cds";
-import { Conversations } from "#cds-models/AppRequestsService";
+import { Conversations, AppRequests } from "#cds-models/AppRequestsService";
 import {
   ConversationSyncService,
   commentCreated,
 } from "#cds-models/ConversationSyncService";
 
-const LOG = cds.log("AppRequests");
+const LOG = cds.log("app-requests-srv");
 
 export default class AppRequestsService extends ApplicationService {
   async init() {
@@ -15,6 +15,11 @@ export default class AppRequestsService extends ApplicationService {
       await syncSrv.emit("commentCreated", {
         requestId: req.data?.request_ID,
       } as commentCreated);
+    });
+    this.on("DELETE", AppRequests, async (req, next) => {
+      await next();
+      // delete corresponding conversations
+      await DELETE.from(Conversations).where({ request_ID: req.data.ID });
     });
     return super.init();
   }
