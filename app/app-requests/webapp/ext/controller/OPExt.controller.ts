@@ -8,7 +8,8 @@ let socket: WebSocket;
 function registerWebSocket(opExt: OPExt) {
   // create correct url via help of anchor tag
   const urlAnchor = document.createElement("a");
-  urlAnchor.href = "ws/conversation-sync";
+  // REVISIT: better way to switch between local and productive testing?
+  urlAnchor.href = (window.location.host.startsWith("localhost") ? "/" : "") + "ws/conversation-sync";
   const wsUri = urlAnchor.href;
   socket = new WebSocket("ws" + wsUri.substring(4));
   socket.addEventListener("message", message => {
@@ -19,13 +20,12 @@ function registerWebSocket(opExt: OPExt) {
       };
     };
     switch (payload.event) {
-      case "commentCreated":
-        // update the page
+      case "conversationsUpdated":
         const model = opExt.base.getExtensionAPI().getModel() as ODataModel;
         model.getServiceUrl();
         const context = opExt.base.getExtensionAPI().getBindingContext() as Context;
 
-        // request status update
+        // update list of conversations if user is currently on the object page of the same app request
         if (context.getProperty("ID") === payload.data.requestId) {
           context.requestSideEffects(["conversations"]);
         }

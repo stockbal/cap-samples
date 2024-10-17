@@ -1,9 +1,9 @@
-import cds, { ApplicationService } from "@sap/cds";
-import { Conversations, AppRequests } from "#cds-models/AppRequestsService";
+import { AppRequests, Conversations } from "#cds-models/AppRequestsService";
 import {
   ConversationSyncService,
-  commentCreated,
+  conversationsUpdated,
 } from "#cds-models/ConversationSyncService";
+import cds, { ApplicationService } from "@sap/cds";
 
 const LOG = cds.log("app-requests-srv");
 
@@ -12,9 +12,9 @@ export default class AppRequestsService extends ApplicationService {
     this.on("CREATE", Conversations, async (req, next) => {
       await next();
       const syncSrv = await cds.connect.to(ConversationSyncService);
-      await syncSrv.emit("commentCreated", {
+      await syncSrv.emit("conversationsUpdated", {
         requestId: req.data?.request_ID,
-      } as commentCreated);
+      } as conversationsUpdated);
     });
     this.on("DELETE", AppRequests, async (req, next) => {
       await next();
