@@ -31,6 +31,7 @@ Each scenario is realized in a dedicated branch of this repository.
 ## CAP technical features
 
 - [CAP Type generator](https://github.com/stockbal/cap-samples/tree/typer-playground)
+- [CDS WebSocket plug-in](https://github.com/stockbal/cap-samples/tree/websockets)
 
 ## Authorization/Authentication scenarios
 
