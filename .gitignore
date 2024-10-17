@@ -15,6 +15,10 @@ default-env.json
 
 **/node/
 **/node_modules/
+mta_archives/
+resources/
+app/**/dist
+@cds-models
 
 **/.mta/
 *.mtar
