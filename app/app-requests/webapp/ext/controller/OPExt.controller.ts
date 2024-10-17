@@ -6,9 +6,11 @@ import ODataModel from "sap/ui/model/odata/v4/ODataModel";
 let socket: WebSocket;
 
 function registerWebSocket(opExt: OPExt) {
-  const wsUri = opExt.base.getAppComponent().getManifestObject().resolveUri("/ws/conversation-sync");
-  const protocol = window.location.protocol === "https:" ? "wss://" : "ws://";
-  socket = new WebSocket(`${protocol}${window.location.host}${wsUri}`);
+  // create correct url via help of anchor tag
+  const urlAnchor = document.createElement("a");
+  urlAnchor.href = "ws/conversation-sync";
+  const wsUri = urlAnchor.href;
+  socket = new WebSocket("ws" + wsUri.substring(4));
   socket.addEventListener("message", message => {
     const payload = JSON.parse(message.data) as {
       event: string;
