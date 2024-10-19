@@ -9,18 +9,23 @@
 			visible="{= ${HasActiveEntity} || ${IsActiveEntity}}"></FeedInput>
 		<Panel id="_IDGenPanel"
 			stickyHeader="true"
-			height="auto"
-			headerText="Feed">
+			height="auto">
+			<headerToolbar>
+				<OverflowToolbar id="_IDGenOverflowToolbar1"
+					style="Clear">
+					<Title id="_IDGenTitle"
+						text="Feed" />
+					<ToolbarSpacer id="_IDGenToolbarSpacer" />
+					<Button id="_IDGenButton1"
+						text="Refresh"
+						press="handler.onFeedRefresh"
+						icon="sap-icon://refresh" />
+				</OverflowToolbar>
+			</headerToolbar>
 			<List id="_IDGenList"
 				showSeparators="Inner"
-				growingScrollToLoad="true"
-				items="{ path: 'conversations', sorter: {descending: true, path: 'createdAt'} }">
-				<FeedListItem id="_IDGenFeedListItem"
-					sender="{createdBy}"
-					senderActive="false"
-					timestamp="{createdAt}"
-					text="{content}"
-					convertLinksToAnchorTags="All"/>
+				growing="true"
+				growingScrollToLoad="true">
 			</List>
 		</Panel>
 	</VBox>
