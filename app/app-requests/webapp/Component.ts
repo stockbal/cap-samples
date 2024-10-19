@@ -1,5 +1,5 @@
 import BaseComponent from "sap/fe/core/AppComponent";
-import { setAppComponent } from "./ext/lib/comp-access";
+import compAccess from "./ext/lib/comp-access";
 
 /**
  * @namespace com.appreq.apprequests
@@ -15,7 +15,7 @@ export default class Component extends BaseComponent {
    * @override
    */
   public init(): void {
-    setAppComponent(this);
+    compAccess.setAppComponent(this);
     super.init();
   }
 }

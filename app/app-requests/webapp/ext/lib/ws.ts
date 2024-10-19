@@ -1,7 +1,7 @@
 import ExtensionAPI from "sap/fe/templates/ObjectPage/ExtensionAPI";
 import List from "sap/m/List";
 import Context from "sap/ui/model/odata/v4/Context";
-import { appComp } from "./comp-access";
+import compAccess from "./comp-access";
 
 let socket: WebSocket | undefined;
 
@@ -13,7 +13,7 @@ function getWsUrl() {
   const wsUri = (window.location.host.startsWith("localhost") ? "/" : "") + "ws/conversations";
   // create correct url via help of anchor tag
   const urlAnchor = document.createElement("a");
-  urlAnchor.href = appComp.getManifestObject().resolveUri(wsUri);
+  urlAnchor.href = compAccess.appComp.getManifestObject().resolveUri(wsUri);
   urlAnchor.protocol = urlAnchor.href.startsWith("https") ? "wss" : "ws";
   return urlAnchor.href;
 }
