@@ -5,7 +5,6 @@ import Context from "sap/ui/model/odata/v4/Context";
 import ODataContextBinding from "sap/ui/model/odata/v4/ODataContextBinding";
 import ODataListBinding from "sap/ui/model/odata/v4/ODataListBinding";
 import ODataModel from "sap/ui/model/odata/v4/ODataModel";
-import { registerWebSocket } from "../lib/ws";
 
 function refreshFeed(extApi: ExtensionAPI) {
   ((extApi.byId("_IDGenList") as List).getBinding("items") as ODataListBinding)?.refresh();
@@ -23,13 +22,11 @@ async function onPost(this: ExtensionAPI, event: FeedInput$PostEvent) {
   try {
     await actionCall.invoke();
     refreshFeed(this);
-    registerWebSocket(this);
   } catch (e) {}
 }
 
 function onFeedRefresh(this: ExtensionAPI) {
   refreshFeed(this);
-  registerWebSocket(this);
 }
 
 export { onFeedRefresh, onPost };

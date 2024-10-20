@@ -4,6 +4,7 @@ import Context from "sap/ui/model/odata/v4/Context";
 import compAccess from "./comp-access";
 
 let socket: WebSocket | undefined;
+let reconnectTimeout: number | undefined;
 
 /**
  * Retrieves correct URL for opening a websocket, depending on the environment
@@ -21,8 +22,14 @@ function getWsUrl() {
 function registerWebSocket(extApi: ExtensionAPI) {
   if (socket) return;
   socket = new WebSocket(getWsUrl());
+  clearInterval(reconnectTimeout);
+
+  // auto reconnection in 10s intervals
   socket.addEventListener("close", () => {
     socket = undefined;
+    reconnectTimeout = setInterval(() => {
+      registerWebSocket(extApi);
+    }, 10000);
   });
   socket.addEventListener("message", message => {
     const payload = JSON.parse(message.data) as {
