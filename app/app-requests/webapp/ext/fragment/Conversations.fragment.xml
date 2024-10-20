@@ -17,7 +17,7 @@
 						text="Feed" />
 					<ToolbarSpacer id="_IDGenToolbarSpacer" />
 					<Button id="_IDGenButton1"
-						text="Refresh"
+						tooltip="Refresh"
 						press="handler.onFeedRefresh"
 						icon="sap-icon://refresh" />
 				</OverflowToolbar>
