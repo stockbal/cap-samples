@@ -1,8 +1,8 @@
 import ExtensionAPI from "sap/fe/templates/ObjectPage/ExtensionAPI";
 import List from "sap/m/List";
+import WebSocket from "sap/ui/core/ws/WebSocket";
 import Context from "sap/ui/model/odata/v4/Context";
 import compAccess from "./comp-access";
-import WebSocket from "sap/ui/core/ws/WebSocket";
 
 let socket: WebSocket | undefined;
 let reconnectTimeout: number | undefined;
@@ -13,11 +13,7 @@ let reconnectTimeout: number | undefined;
 function getWsUrl() {
   // REVISIT: better way to switch between local and productive testing?
   const wsUri = (window.location.host.startsWith("localhost") ? "/" : "") + "ws/conversations";
-  // create correct url via help of anchor tag
-  // const urlAnchor = document.createElement("a");
-  // urlAnchor.href = compAccess.appComp.getManifestObject().resolveUri(wsUri);
-  // urlAnchor.protocol = urlAnchor.href.startsWith("https") ? "wss" : "ws";
-  // return urlAnchor.href;
+  // resolve relative ws url to the manifest location of the current component
   return compAccess.appComp.getManifestObject().resolveUri(wsUri);
 }
 
