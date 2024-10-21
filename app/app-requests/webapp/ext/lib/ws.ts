@@ -2,6 +2,7 @@ import ExtensionAPI from "sap/fe/templates/ObjectPage/ExtensionAPI";
 import List from "sap/m/List";
 import Context from "sap/ui/model/odata/v4/Context";
 import compAccess from "./comp-access";
+import WebSocket from "sap/ui/core/ws/WebSocket";
 
 let socket: WebSocket | undefined;
 let reconnectTimeout: number | undefined;
@@ -13,10 +14,11 @@ function getWsUrl() {
   // REVISIT: better way to switch between local and productive testing?
   const wsUri = (window.location.host.startsWith("localhost") ? "/" : "") + "ws/conversations";
   // create correct url via help of anchor tag
-  const urlAnchor = document.createElement("a");
-  urlAnchor.href = compAccess.appComp.getManifestObject().resolveUri(wsUri);
-  urlAnchor.protocol = urlAnchor.href.startsWith("https") ? "wss" : "ws";
-  return urlAnchor.href;
+  // const urlAnchor = document.createElement("a");
+  // urlAnchor.href = compAccess.appComp.getManifestObject().resolveUri(wsUri);
+  // urlAnchor.protocol = urlAnchor.href.startsWith("https") ? "wss" : "ws";
+  // return urlAnchor.href;
+  return compAccess.appComp.getManifestObject().resolveUri(wsUri);
 }
 
 function registerWebSocket(extApi: ExtensionAPI) {
@@ -25,14 +27,17 @@ function registerWebSocket(extApi: ExtensionAPI) {
   clearInterval(reconnectTimeout);
 
   // auto reconnection in 10s intervals
-  socket.addEventListener("close", () => {
+  socket.attachClose(() => {
+    socket?.destroy();
     socket = undefined;
     reconnectTimeout = setInterval(() => {
       registerWebSocket(extApi);
     }, 10000);
   });
-  socket.addEventListener("message", message => {
-    const payload = JSON.parse(message.data) as {
+
+  socket.attachMessage(e => {
+    const data = e.getParameter("data")!;
+    const payload = JSON.parse(data) as {
       event: string;
       data: {
         requestId: string;
