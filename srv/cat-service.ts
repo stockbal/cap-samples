@@ -1,14 +1,14 @@
 import { Book, Books, publish } from "#cds-models/CatalogService";
-import { ApplicationService, log } from "@sap/cds";
+import cds from "@sap/cds";
+import { setTimeout } from "timers/promises";
+import BaseAppService from "./lib/base-service";
 
-console.log(Book.keys.ID);
-
-const LOG = log("cat-srv");
-
-export default class CatalogService extends ApplicationService {
+export default class CatalogService extends BaseAppService {
   override async init(): Promise<void> {
-    this.before("SAVE", Book, async (req) => {
-      LOG.info("BEFORE SAVE");
+    this.logger = cds.log("cat-service", "trace");
+
+    this.before("SAVE", Book, (req) => {
+      this.logger.info("BEFORE SAVE");
 
       if (req.data.stock! > 1000) {
         req.error({ code: "422", message: "INVALID_STOCK" });
@@ -16,25 +16,32 @@ export default class CatalogService extends ApplicationService {
     });
 
     this.after("READ", Books, (books) => {
-      LOG.info("After READ Books", "$count", books?.$count);
+      this.logger.info("After READ Books", "$count", books?.$count);
     });
 
     this.after("each", Books, (book) => {
-      LOG.info("After each for book", book?.title, book);
+      this.logger.info("After each for book", book?.title, book);
     });
 
-    this.after("READ", Books.drafts, (data, req) => {
-      // Note: due to the singular type of Books.drafts and Book.drafts a cast to the plural is required
-      const books = data as Books;
-      LOG.info(`[Books.drafts]: After ${req.event} '${req.target.name}'`, books);
+    this.after("READ", Books.drafts, (books, req) => {
+      this.logger.info(`[Books.drafts]: After ${req.event} '${req.target.name}'`, books);
     });
 
-    this.before("DELETE", Book, async (req) => {
-      LOG.info(`Before ${req.event} ${req.target}`);
+    this.before("DELETE", Book, (req) => {
+      this.logger.info(`Before ${req.event} ${req.target.name}`);
     });
 
-    this.on(publish, (req) => {
-      LOG.info(`Publish book with id ${req.data.bookId} and publisher ${req.data.publisher}`);
+    this.on(publish, async (req) => {
+      return this.runAsync(
+        "publish books",
+        async () => {
+          const b = await SELECT.one.from(Books, req.data.bookId!);
+          this.logger.info("Perform long running operation...");
+          await setTimeout(2000);
+          this.logger.info("Publishing book", b.title, "for publisher", req.data.publisher);
+        },
+        { catchErr: true }
+      );
     });
 
     return super.init();

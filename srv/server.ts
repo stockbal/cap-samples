@@ -9,8 +9,10 @@ cds.on("served", async () => {
 
   const service = await cds.connect.to(CatalogService.default);
 
-  await service.publish({ bookId: "846dd710-1a64-4104-8774-3746a3a2bbd8", publisher: "Tor" });
-  await service.publish("846dd710-1a64-4104-8774-3746a3a2bbd8", "Tor");
+  // eslint-disable-next-line @typescript-eslint/await-thenable
+  await service.publish({ bookId: "a6eab5ad-5cb5-4962-bf2e-40da704ef793", publisher: "Tor" });
+  // eslint-disable-next-line @typescript-eslint/await-thenable
+  await service.publish("a6eab5ad-5cb5-4962-bf2e-40da704ef793", "Tor");
 
   await SELECT.from(CatalogService.Books.drafts).columns("DraftAdministrativeData_DraftUUID");
   console.log(await service.run(SELECT.from(CatalogService.Books).columns((b) => b("*"))));
