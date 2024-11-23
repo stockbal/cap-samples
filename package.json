@@ -6,21 +6,21 @@
   "license": "UNLICENSED",
   "private": false,
   "dependencies": {
-    "@cap-js/hana": "^1.2.0",
+    "@cap-js/hana": "^1.4.1",
     "@sap/cds": "^8",
     "@sap/xssec": "^4",
-    "express": "^4.21.0"
+    "express": "^4.21.1"
   },
   "devDependencies": {
-    "@cap-js/cds-typer": ">=0.27",
-    "@cap-js/cds-types": "^0.6.5",
+    "@cap-js/cds-typer": ">=0.28",
+    "@cap-js/cds-types": "^0.7.0",
     "@cap-js/sqlite": "^1",
     "@sap/cds-dk": "^8",
     "@tsconfig/node20": "^20.1.4",
-    "@types/jest": "^29.5.13",
-    "@types/node": "^20",
-    "@typescript-eslint/eslint-plugin": "^7.18.0",
-    "@typescript-eslint/parser": "^7.18.0",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22",
+    "@typescript-eslint/eslint-plugin": "^8.13.0",
+    "@typescript-eslint/parser": "^8.13.0",
     "axios": "^1.7.7",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
@@ -31,7 +31,7 @@
     "rimraf": "^6.0.1",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
-    "typescript": "^5.6.2"
+    "typescript": "^5.6.3"
   },
   "scripts": {
     "start": "cds-serve",
@@ -39,6 +39,7 @@
     "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
     "gen:types": "npx @cap-js/cds-typer '*'",
     "watch": "cds-ts watch",
+    "watch:x": "cds-tsx w",
     "cf:de": "cf de cap-type-generator-srv",
     "test": "jest --silent"
   },
@@ -46,6 +47,9 @@
     "#cds-models/*": "./@cds-models/*/index.js"
   },
   "cds": {
+    "log": {
+      "service": true
+    },
     "typer": {
       "use_entities_proxy": true,
       "log_level": "ERROR",
@@ -53,6 +57,9 @@
       "output_directory": "@cds-models"
     },
     "requires": {
+      "[development]": {
+        "auth": "mocked"
+      },
       "[production]": {
         "auth": "xsuaa",
         "db": "hana"
