@@ -1,0 +1,3 @@
+{
+  "eslint.validate": ["cds", "csn", "csv", "csv (semicolon)", "tsv", "tab"]
+}
