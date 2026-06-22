@@ -1,0 +1,6 @@
+{
+  "vitest.nodeExecArgs": [],
+  "vitest.nodeEnv": {
+    "NODE_OPTIONS": "--import=tsx"
+  }
+}

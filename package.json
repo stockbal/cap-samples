@@ -17,7 +17,7 @@
   },
   "scripts": {
     "start": "cds-serve",
-    "test": "vitest --silent",
+    "test": "NODE_OPTIONS='--import tsx' vitest --silent",
     "cds:repl": "cds-tsx r -r ."
   },
   "private": true,
